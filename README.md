@@ -2,35 +2,53 @@
 
 ## Overview
 
-HearHere is a social media app for sharing songs and playlists with friends, as well as finidng similar songs.
+HearHere is a social media app for sharing songs and playlists with friends and family.
 
 ### Problem
 
-How many times have you heard a friend play a song and then wonder what song it was? How many times have you 
-been at a part or event where the DJ was playing a great music, only to never find that playlist again? Herehere 
-aims to solve that problem by providing a platform for just that - a place to share and save music.
+How many times have you heard a friend play a song and then wonder what song it was? How many times have you been at a part or event where the DJ was playing a great music, only to never find that playlist again? Herehere aims to solve that problem by providing a platform for just that - a place to share and save music.
 
 ### User Profile
 
-Who will use your app? How will they use it? Any special considerations that your app must take into account.
+- People who listen to music regularly and want to save their songs
+- People who want to share what they're listening to
+- People who want to discover what other people are listening to
 
 ### Features
 
-List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
+- Visitor
+    - Search for songs
+    - Sign up for an account
+- Logged in user
+    - Save individual songs
+    - Save and update playlists
+    - Share a song or playlist with another user
 
 ## Implementation
 
 ### Tech Stack
 
-List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
+Front End:
+- React
+- JavaScript
+- SASS/SCSS
+
+Back End:
+- MySQL
+- Express
 
 ### APIs
 
-List any external sources of data that will be used in your app.
+- Possible use of the Spotify API
+- Will create and use a custom API
 
 ### Sitemap
 
-List the pages of your app with brief descriptions. You can show this visually, or write it out.
+- Home Page/Browse
+- Sign Up Page
+- Login Page
+- Saved Songs Page
+- Saved Playlists Page
 
 ### Mockups
 
@@ -46,7 +64,7 @@ List endpoints that your server will implement, including HTTP methods, paramete
 
 ### Auth
 
-Does your project include any login or user profile functionality? If so, describe how authentication/authorization will be implemented.
+- Will use JWT auth
 
 ## Roadmap
 
@@ -54,4 +72,5 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 
 ## Nice-to-haves
 
-Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+- Comment functionality
+- DM functionality
