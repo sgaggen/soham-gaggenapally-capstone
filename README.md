@@ -1,12 +1,14 @@
-# Project Title
+# HearHere
 
 ## Overview
 
-What is your app? Brief description in a couple of sentences.
+HearHere is a social media app for sharing songs and playlists with friends, as well as finidng similar songs.
 
 ### Problem
 
-Why is your app needed? Background information around any pain points or other reasons.
+How many times have you heard a friend play a song and then wonder what song it was? How many times have you 
+been at a part or event where the DJ was playing a great music, only to never find that playlist again? Herehere 
+aims to solve that problem by providing a platform for just that - a place to share and save music.
 
 ### User Profile
 
