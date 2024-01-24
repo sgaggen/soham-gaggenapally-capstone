@@ -52,15 +52,33 @@ Back End:
 
 ### Mockups
 
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
+#### Login Page
+![](/mockups/login.png)
+
+#### Sign Up Page
+![](/mockups/signup.png)
+
+#### Landing Page
+![](/mockups/landing.png)
+
 
 ### Data
 
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
+The database will contain a table for users, a table for playlists, and possibly a table for activity.
 
 ### Endpoints
 
-List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+**GET /song/:songId**
+- Will get information on a specific song
+
+**GET /playlist/:playlistId**
+- Will get information on a specific song
+
+**POST /playlist/:playlistId/:songId**
+- Will add a song to a playlist
+
+**DELETE /playlist/:playlistId/:songId**
+- Will remvoe a song from a playlist
 
 ### Auth
 
