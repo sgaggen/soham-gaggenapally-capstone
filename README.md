@@ -91,7 +91,7 @@ The database will contain a table for users, a table for playlists, and possibly
 - Will add a song to a specific playlist
 
 **DELETE /playlist/:playlistId/:songId**
-- Will remvoe a song from a specific playlist
+- Will remove a song from a specific playlist
 
 **GET /user/:userId**
 - Will get a user's basic info, saved songs, and playlists
