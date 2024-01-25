@@ -108,11 +108,19 @@ The database will contain a table for users, a table for playlists, and possibly
 - Sprint 1: POC | Days 1-3
     - Test Spotify API
     - Create basic back end and endpoints
+        - Create database
+        - Create Spotify calls and wrappers from custom API
     - Create skeletons for front end
+        - Basic info/content on each page
+        - C**R**UD operations with back end
 
 - Sprint 2: MVP | Days 3-6
     - Add components and modularize pages
+        - Add header/footer
+        - Reuse components where needed
     - Make pages dynamic with back end
+        - Hook up API calls to database
+        - **C**R**UD** operations with back end
 
 - Sprint 3: Polish | Days 6-10
     - Add all remaining styling
