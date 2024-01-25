@@ -2,7 +2,7 @@
 
 ## Overview
 
-HearHere is a social media app for sharing songs and playlists with friends and family. It's meant as an accompaniment to Spotify and helps organize songs and playlists.
+HearHere is an app for sharing songs and playlists with friends and family. It's meant as an accompaniment to Spotify and helps organize songs and playlists.
 
 ### Problem
 
@@ -122,16 +122,17 @@ The database will contain a table for users, a table for playlists, and possibly
         - Hook up API calls to database
         - **C**R**UD** operations with back end
 
-- Sprint 3: Polish | Days 6-10
+- Sprint 3: Polish + Extras | Days 6-10
     - Add all remaining styling
     - Bug test and stress test
+    - Add nice to haves
 
 - Prep for presentation | Days 10-11
 
 ## Nice-to-haves
 
-- JWT auth
-- Spotify player embedded so user can play songs
-- Song recommendations once one's been saved
-- Comment functionality
-- DM and/or live update functionality using Socket.io
+- JWT auth | For more security
+- Spotify player embedded so user can play songs | For a more standalone experience
+- Song recommendations once one's been saved | For more functionality
+- Comment, rating, liking functionality | To make it more of a social media app
+- DM and/or live update functionality using Socket.io | To make it more of a social media app
