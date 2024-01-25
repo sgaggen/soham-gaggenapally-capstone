@@ -6,7 +6,7 @@ HearHere is a social media app for sharing songs and playlists with friends and 
 
 ### Problem
 
-How many times have you heard a friend play a song and then wonder what song it was? How many times have you been at a part or event where the DJ was playing great music, only to never find that playlist again? HereHere aims to solve that problem by providing a platform for just that - a place to share and save music.
+How many times have you heard a friend play a song and then wonder what song it was? How many times have you been at a part or event where the DJ was playing great music, only to never find that playlist again? HearHere aims to solve that problem by providing a platform for just that - a place to share and save music.
 
 ### User Profile
 
