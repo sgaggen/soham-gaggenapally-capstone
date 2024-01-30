@@ -39,7 +39,7 @@ function Search() {
 
     return (
         <div>
-            <h3>this is the search bar</h3>
+            <h3>this is the search bar div</h3>
             <form onSubmit={handleFormSubmition}>
                 <label htmlFor="search">Search</label>
                 <input
