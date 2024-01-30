@@ -132,6 +132,7 @@ The database will contain a table for users, a table for playlists, and possibly
 ## Nice-to-haves
 
 - JWT auth | For more security
+- Autocomplete | For a more convenient search mechanism
 - Spotify player embedded so user can play songs | For a more standalone experience
 - Song recommendations once one's been saved | For more functionality
 - Comment, rating, liking functionality | To make it more of a social media app

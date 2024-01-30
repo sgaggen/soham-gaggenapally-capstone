@@ -55,7 +55,7 @@ const getAuth = async () => {
 
 let access_token;
 
-app.get("/:search", async (req, res) => {
+app.get("/search/:search", async (req, res) => {
     try {
         // need to add handling so this automatically refreshes on timeout
         access_token = access_token ? access_token : await getAuth();   // first initialized on line current-5
@@ -75,6 +75,14 @@ app.get("/:search", async (req, res) => {
     }
 });
 
+
+// app.get("/auto/:search", async (req, res) => {
+//     try {
+//         const response = await axios.get
+//     } catch (error) {
+//         console.log("error in autocomplete get:", error);
+//     }
+// })
 
 
 
