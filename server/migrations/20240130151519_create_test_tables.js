@@ -27,10 +27,8 @@ exports.up = function (knex) {
         .createTable("playlist", (table) => {
             table.increments("id").primary();
             table.string("playlist_group_id").notNullable();
-            // table.string("song_id").notNullable();
             table
                 .string("song_id")
-                .unsigned()
                 .references("song.id")
                 .onUpdate("CASCADE")
                 .onDelete("CASCADE");
@@ -58,7 +56,6 @@ exports.up = function (knex) {
                 .onDelete("CASCADE");
             table
                 .string("song_id")
-                .unsigned()
                 .references("song.id")
                 .onUpdate("CASCADE")
                 .onDelete("CASCADE");
