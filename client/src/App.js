@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
 import './App.scss';
+import HomePage from "./pages/HomePage/HomePage";
+import Header from "./components/Header/Header";
 
 function App() {
     return (
         <BrowserRouter>
-            {/* <Header /> */}
+            <Header />
             <Routes>
                 <Route path='/' element={<Navigate to='/home' />} />
                 <Route path="/home" element={<HomePage />} />
