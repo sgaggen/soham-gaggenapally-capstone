@@ -5,42 +5,47 @@ import { useEffect, useState } from 'react';
 function Activity() {
     const [activity, setActivity] = useState([])
 
-    async function handleFormSubmition(event) {
-        event.preventDefault();
+    // async function handleFormSubmition(event) {
+    //     event.preventDefault();
 
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
-            console.log(response.data.tracks.items);
-            setResults(response.data.tracks.items);
+    //     try {
+    //         const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
+    //         console.log(response.data.tracks.items);
+    //         setResults(response.data.tracks.items);
 
-            // event.target.reset();
-        } catch (error) {
-            console.log("search didn't work from client:", error)
-        }
-    }
+    //         // event.target.reset();
+    //     } catch (error) {
+    //         console.log("search didn't work from client:", error)
+    //     }
+    // }
 
-    async function handleAddClick(info) {
+    // async function handleAddClick(info) {
 
-        console.log(info);
-        console.log("need to add to user db")
-        console.log("need to add to activity db")
+    //     console.log(info);
+    //     console.log("need to add to user db")
+    //     console.log("need to add to activity db")
 
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, info)
-            console.log("after tring to post:", response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    //     try {
+    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, info)
+    //         console.log("after tring to post:", response);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     async function getActivity () {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`)
-            console.log(response.data)
+            // console.log(response.data)
+            setActivity(response.data)
         } catch (error) {
             console.log("couldn't get activity:", error)
         }
     }
+    
+    useEffect(() => { getActivity() }, []);
+    
+    if (!activity) return <p>loading activity</p>
 
     return (
         <div>
@@ -49,9 +54,8 @@ function Activity() {
                 {activity.map(action =>
                     <div key={action.id}>
                         <p>
-                            {action.name} by {action.artists[0].name}
+                            SONG {action.song_id} by USER {action.user_id} at {action.time}
                         </p>
-                        <button onClick={() => handleAddClick(action)}> + </button>
                     </div>)}
             </div>
         </div>
