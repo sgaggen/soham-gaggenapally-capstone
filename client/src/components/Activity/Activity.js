@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
-function Activity() {
+function Activity({ update }) {
     const [activity, setActivity] = useState([])
 
     // async function handleFormSubmition(event) {
@@ -33,7 +33,7 @@ function Activity() {
     //     }
     // }
 
-    async function getActivity () {
+    async function getActivity() {
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`)
             // console.log(response.data)
@@ -42,9 +42,9 @@ function Activity() {
             console.log("couldn't get activity:", error)
         }
     }
-    
-    useEffect(() => { getActivity() }, []);
-    
+
+    useEffect(() => { getActivity() }, [update]);
+
     if (!activity) return <p>loading activity</p>
 
     return (
