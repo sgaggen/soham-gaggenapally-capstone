@@ -96,5 +96,9 @@ app.post("/test", (req, res) => {
     res.send("got stuff");
 })
 
+app.get("/data", (_req, res) => {
+    res.json(data);
+});
+
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));
