@@ -8,11 +8,23 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 const axios = require('axios');
-const PORT = 5050;
+const PORT = process.env.PORT || 5050;
 app.use(cors());
 app.use(express.json());
 // const knex = require('./knexfile.js');
+// const qs = require('qs');
 
+let data = {
+    users: {},
+    activity: {},
+    playlists: {asdf: []}
+};
+
+app.use((req, _res, next) => {
+    const moment = new Date();
+    console.log(moment.toLocaleTimeString('en-US', { timeZone: "America/New_York" }), "|", req.method, "|", req.originalUrl);
+    next();
+});
 
 
 // Basic response for home page
@@ -29,6 +41,7 @@ const getAuth = async () => {
     try {
         const token_url = 'https://accounts.spotify.com/api/token';
         const data = { 'grant_type': 'client_credentials' };
+        // const data = qs.stringify({ 'grant_type': 'client_credentials' });
 
         const response = await axios.post(token_url, data, {
             headers: {
@@ -47,10 +60,10 @@ const getAuth = async () => {
 
 let access_token;
 
-app.get("/:search", async (req, res) => {
+app.get("/search/:search", async (req, res) => {
     try {
-        // const access_token = await getAuth();
-        access_token = access_token ? access_token : await getAuth();   // first initialized on line 48 (current-5)
+        // need to add handling so this automatically refreshes on timeout
+        access_token = access_token ? access_token : await getAuth();   // first initialized on line current-5
 
         const url = `https://api.spotify.com/v1/search?q=${req.params.search}&type=track&market=US&limit=3`;
 
@@ -68,7 +81,20 @@ app.get("/:search", async (req, res) => {
 });
 
 
+// app.get("/auto/:search", async (req, res) => {
+//     try {
+//         const response = await axios.get
+//     } catch (error) {
+//         console.log("error in autocomplete get:", error);
+//     }
+// })
 
+app.post("/test", (req, res) => {
+    // console.log(req.body);
+    data.playlists.asdf.push(req.body.id);
+    console.log(data);
+    res.send("got stuff");
+})
 
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));
