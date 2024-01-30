@@ -14,6 +14,11 @@ app.use(express.json());
 // const knex = require('./knexfile.js');
 // const qs = require('qs');
 
+let data = {
+    users: {},
+    activity: {},
+    playlists: {asdf: []}
+};
 
 app.use((req, _res, next) => {
     const moment = new Date();
@@ -84,7 +89,12 @@ app.get("/search/:search", async (req, res) => {
 //     }
 // })
 
-
+app.post("/test", (req, res) => {
+    // console.log(req.body);
+    data.playlists.asdf.push(req.body.id);
+    console.log(data);
+    res.send("got stuff");
+})
 
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));
