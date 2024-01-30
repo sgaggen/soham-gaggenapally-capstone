@@ -1,3 +1,5 @@
+const knex = require("knex")(require("./knexfile"));
+
 // Clear and set up new run
 console.clear();
 console.log("New run-------------------------------------------------------------------------------------");
@@ -98,6 +100,15 @@ app.post("/test", (req, res) => {
 
 app.get("/data", (_req, res) => {
     res.json(data);
+});
+
+app.get("/db/:table", async (req, res) => {
+    try {
+        const data = await knex(req.params.table);
+        res.json(data);
+    } catch (error) {
+        console.log("something wrong wtih accessing db it seems:", error)
+    }
 });
 
 // Spin up server
