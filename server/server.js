@@ -91,8 +91,8 @@ app.get("/search/:search", async (req, res) => {
 //     }
 // })
 
-app.post("/test", async (req, res) => {
-    console.log("req.body from POST /test:", req.body);
+app.post("/save", async (req, res) => {
+    console.log("req.body from POST /save:", req.body);
     // data.playlists.asdf.push(req.body.id);
     // console.log(data);
     try {

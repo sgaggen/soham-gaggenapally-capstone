@@ -26,7 +26,7 @@ function Activity({ update }) {
     //     console.log("need to add to activity db")
 
     //     try {
-    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, info)
+    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, info)
     //         console.log("after tring to post:", response);
     //     } catch (error) {
     //         console.log(error);

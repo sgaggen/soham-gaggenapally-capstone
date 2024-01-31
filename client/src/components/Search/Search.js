@@ -33,7 +33,7 @@ function Search({updater}) {
 
         // };
         const activityData = {
-            user_id: 1,         // need to dynamically get this from the login
+            user_id: window.sessionStorage.getItem("userId"),         // need to dynamically get this from the login
             song_id: info.id
         }
 
@@ -45,11 +45,11 @@ function Search({updater}) {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, {
                 song: songData, 
                 activity: activityData
             })
-            // const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, activityData)
+            // const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, activityData)
             console.log("after tring to post:", response);
             updater("thingy");
             console.log("after running setUpdate");
