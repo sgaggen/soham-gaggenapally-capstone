@@ -22,10 +22,10 @@ function SignUpPage() {
             // setIsLoginError(false);
             // setErrorMessage("");
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
+                name: event.target.name.value,
                 username: event.target.username.value,
                 password: event.target.password.value,
                 email: event.target.email.value,
-                name: "BLANK"
             });
             console.log("signuppage end of try:", response.data)
 
@@ -48,6 +48,9 @@ function SignUpPage() {
         <main>
             <h1>SIGN UP</h1>
             <form onSubmit={handleSignup}>
+                <div>
+                    <input type="text" name="name" placeholder="name" />
+                </div>
                 <div>
                     <input type="text" name="username" placeholder="username" />
                 </div>
