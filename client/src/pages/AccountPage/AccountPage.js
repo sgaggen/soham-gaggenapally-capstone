@@ -1,18 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from "react";
 
 function AccountPage() {
-    const navigate = useNavigate();
     const [user, setUser] = useState([])
 
     async function getUser() {
         console.log("in getuser")
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`);
-            // console.log(response.data)
-            // response.data.name = response.data.name == "BLANK" ? "there" : response.data.name;
             setUser(response.data);
         } catch (error) {
             console.log("something wrong client getting user info:", error)
@@ -20,12 +17,9 @@ function AccountPage() {
     }
 
     useEffect(() => {
-        //need to use this to fetch the account details to either display or further update/modify
         getUser();
     }, [])
-    // const [update, setUpdate] = useState('');
 
-    // useEffect (() => setUpdate('nothing'), [update]);
 
     async function handleUpdateAccount(event) {
         event.preventDefault();
@@ -41,14 +35,12 @@ function AccountPage() {
             });
             console.log(response.data)
 
-            
+
 
             getUser();
             event.target.reset();
 
         } catch (error) {
-            // setIsLoginError(true);
-            // setErrorMessage(error.response.data.error.message);
             console.log("error client updating account:", error);
         }
     };

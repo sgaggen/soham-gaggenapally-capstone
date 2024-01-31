@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Header () {
+function Header() {
     return (
         <header>
             HearHere
@@ -8,9 +8,7 @@ function Header () {
                 <Link to='/home'>Home</Link>
                 <Link to='/login'>Log In</Link>
                 <Link to='/signup'>Sign Up</Link>
-                {/* {if (window.sessionStorage.getItem("userId")) <Link to='/account'>Account</Link>} */}
                 {window.sessionStorage.getItem("userId") ? <Link to='/account'>Account</Link> : ""}
-                {/* <Link to='/account'>Account</Link> */}
             </nav>
         </header>
     )

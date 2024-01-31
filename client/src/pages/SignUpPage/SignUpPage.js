@@ -4,23 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
     const navigate = useNavigate();
-    // const [update, setUpdate] = useState('');
 
-    // useEffect (() => setUpdate('nothing'), [update]);
-
-    async function handleSignup (event) {
+    async function handleSignup(event) {
         event.preventDefault();
 
         try {
-            // const response = await axios.post(loginUrl, {
-            //     username: e.target.username.value,
-            //     password: e.target.password.value,
-            // });
-            // sessionStorage.setItem("JWTtoken", response.data.token);
 
-            // setIsLoggedIn(true);
-            // setIsLoginError(false);
-            // setErrorMessage("");
+            
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
                 name: event.target.name.value,
                 username: event.target.username.value,
@@ -35,7 +25,6 @@ function SignUpPage() {
             }
 
             navigate(0)
-            // window.sessionStorage.getItem("key");
 
         } catch (error) {
             // setIsLoginError(true);

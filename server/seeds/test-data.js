@@ -21,7 +21,7 @@ exports.seed = async function (knex) {
             email: 'janedoe@janedoe.com'
         }
     ]);
-    
+
     await knex('song').del()
     await knex('song').insert([
         {

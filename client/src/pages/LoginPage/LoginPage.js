@@ -19,19 +19,12 @@ function LoginPage() {
 
     // useEffect (() => setUpdate('nothing'), [update]);
 
-    async function handleLogin (event) {
+    async function handleLogin(event) {
         event.preventDefault();
 
         try {
-            // const response = await axios.post(loginUrl, {
-            //     username: e.target.username.value,
-            //     password: e.target.password.value,
-            // });
-            // sessionStorage.setItem("JWTtoken", response.data.token);
 
-            // setIsLoggedIn(true);
-            // setIsLoginError(false);
-            // setErrorMessage("");
+
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
                 username: event.target.username.value,
                 password: event.target.password.value
@@ -43,8 +36,8 @@ function LoginPage() {
                 navigate('/home');
             }
 
-            navigate(0)
-            // window.sessionStorage.getItem("key");
+            navigate(0) // if bad login just reroute again --> need to change this to better error handling
+
 
         } catch (error) {
             // setIsLoginError(true);
