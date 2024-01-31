@@ -91,15 +91,30 @@ app.get("/search/:search", async (req, res) => {
 //     }
 // })
 
-app.post("/test", (req, res) => {
-    // console.log(req.body);
-    data.playlists.asdf.push(req.body.id);
-    console.log(data);
-    res.send("got stuff");
+app.post("/test", async (req, res) => {
+    console.log("req.body from POST /test:", req.body);
+    // data.playlists.asdf.push(req.body.id);
+    // console.log(data);
+    try {
+        let response = await knex('song').insert(req.body.song)
+        response = await knex('activity').insert(req.body.activity)
+        res.send(response.data);
+    } catch (error) {
+        console.log("error trying to put into db:", error)
+    }
 })
 
 app.get("/data", (_req, res) => {
     res.json(data);
+});
+
+app.get("/db/activity", async (_req, res) => {
+    try {
+        const data = await knex('activity').orderBy('time', 'desc').limit(10);
+        res.json(data);
+    } catch (error) {
+        console.log("something wrong wtih accessing db it seems:", error)
+    }
 });
 
 app.get("/db/:table", async (req, res) => {
