@@ -126,5 +126,19 @@ app.get("/db/:table", async (req, res) => {
     }
 });
 
+app.post("/login", async (req, res) => {
+    try {
+        const user = await knex('user').where({username: req.body.username}).first();
+        console.log("user from posting/login:", user);
+
+        // if (!user) {
+        //     return res.status(401).json({ message: 'Credentials not found' });
+        // }
+        res.send(user);
+    } catch (error) {
+        console.log("error server trying to log in:", error);
+    }
+});
+
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));
