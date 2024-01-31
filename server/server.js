@@ -130,7 +130,24 @@ app.post("/login", async (req, res) => {
     try {
         const user = await knex('user').where({username: req.body.username}).first();
         console.log("user from posting/login:", user);
-
+        
+        // if (!user) {
+            //     return res.status(401).json({ message: 'Credentials not found' });
+            // }
+            res.send(user);
+        } catch (error) {
+            console.log("error server trying to log in:", error);
+        }
+    });
+    
+    app.post("/signup", async (req, res) => {
+        try {
+            const response = await knex('user').insert(req.body);
+            console.log("response from posting/signup:", response[0]);
+            
+            const user = await knex('user').where({id: response[0]}).first();
+            console.log("user from posting/signup:", user);
+            
         // if (!user) {
         //     return res.status(401).json({ message: 'Credentials not found' });
         // }
