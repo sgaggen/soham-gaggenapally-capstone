@@ -91,8 +91,8 @@ app.get("/search/:search", async (req, res) => {
 //     }
 // })
 
-app.post("/test", async (req, res) => {
-    console.log("req.body from POST /test:", req.body);
+app.post("/save", async (req, res) => {
+    console.log("req.body from POST /save:", req.body);
     // data.playlists.asdf.push(req.body.id);
     // console.log(data);
     try {
@@ -123,6 +123,37 @@ app.get("/db/:table", async (req, res) => {
         res.json(data);
     } catch (error) {
         console.log("something wrong wtih accessing db it seems:", error)
+    }
+});
+
+app.post("/login", async (req, res) => {
+    try {
+        const user = await knex('user').where({username: req.body.username}).first();
+        console.log("user from posting/login:", user);
+        
+        // if (!user) {
+            //     return res.status(401).json({ message: 'Credentials not found' });
+            // }
+            res.send(user);
+        } catch (error) {
+            console.log("error server trying to log in:", error);
+        }
+    });
+    
+    app.post("/signup", async (req, res) => {
+        try {
+            const response = await knex('user').insert(req.body);
+            console.log("response from posting/signup:", response[0]);
+            
+            const user = await knex('user').where({id: response[0]}).first();
+            console.log("user from posting/signup:", user);
+            
+        // if (!user) {
+        //     return res.status(401).json({ message: 'Credentials not found' });
+        // }
+        res.send(user);
+    } catch (error) {
+        console.log("error server trying to log in:", error);
     }
 });
 

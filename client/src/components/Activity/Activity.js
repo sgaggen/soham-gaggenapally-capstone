@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Activity({ update }) {
@@ -26,12 +27,15 @@ function Activity({ update }) {
     //     console.log("need to add to activity db")
 
     //     try {
-    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/test`, info)
+    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, info)
     //         console.log("after tring to post:", response);
     //     } catch (error) {
     //         console.log(error);
     //     }
     // }
+
+
+    
 
     async function getActivity() {
         try {
@@ -45,6 +49,17 @@ function Activity({ update }) {
 
     useEffect(() => { getActivity() }, [update]);
 
+    
+    // if the user isn't logged in, don't show data and prompt them to sign up or login
+    if (!window.sessionStorage.getItem("userId")) {
+        return (
+            <div>
+                Please <Link to='/login'>log in</Link> or <Link to='/signup'>sign up</Link> to view recent activity.
+            </div>
+        )
+    }
+    
+    // if we're still fetching the activity then say so
     if (!activity) return <p>loading activity</p>
 
     return (
