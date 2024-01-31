@@ -1,9 +1,20 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from "react";
 
 function LoginPage() {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (window.sessionStorage.getItem("userId")) {
+            // alert("Please sign up or login to add songs.")
+            navigate('/home');
+            console.log("already logged in");
+            return
+        }
+
+    }, [])
     // const [update, setUpdate] = useState('');
 
     // useEffect (() => setUpdate('nothing'), [update]);
