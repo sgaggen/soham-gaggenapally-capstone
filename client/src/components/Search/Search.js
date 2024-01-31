@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function Search({updater}) {
+function Search({ updater }) {
     const [results, setResults] = useState([])
     const navigate = useNavigate();
 
@@ -22,18 +22,7 @@ function Search({updater}) {
     }
 
     async function handleAddClick(info) {
-        // console.log(event.target.parentElement.children);
-        // console.log(event.target.parentNode);
-        // parentElement.query 
-        // document.querySelector() // could probably use this instead to find things instead
 
-        // console.log(info);
-        // console.log("need to add to user db")
-        // console.log("need to add to activity db")
-
-        // const package = {
-
-        // };
 
         // if the user isn't logged in take them to login or sign up
         if (!window.sessionStorage.getItem("userId")) {
@@ -43,7 +32,7 @@ function Search({updater}) {
         }
 
         const activityData = {
-            user_id: window.sessionStorage.getItem("userId"),         // need to dynamically get this from the login
+            user_id: window.sessionStorage.getItem("userId"),
             song_id: info.id
         }
 
@@ -56,10 +45,10 @@ function Search({updater}) {
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, {
-                song: songData, 
+                song: songData,
                 activity: activityData
             })
-            // const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, activityData)
+
             console.log("after tring to post:", response);
             updater("thingy");
             console.log("after running setUpdate");
@@ -77,11 +66,8 @@ function Search({updater}) {
                     type="text"
                     name="search"
                     id="search"
-                    // className={`form__input ${warehouseNameError && 'form__input--invalid'}`}
+                    // className={`form__input ${someError && 'form__input--invalid'}`}
                     placeholder="search for a song"
-                // value={warehouseName}
-                // onChange={handleInputChange}
-                // onChange={handleFormSubmition}
                 />
             </form>
             <div>these are the results:

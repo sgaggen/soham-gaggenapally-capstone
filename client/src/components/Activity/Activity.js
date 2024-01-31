@@ -35,7 +35,7 @@ function Activity({ update }) {
     // }
 
 
-    
+
 
     async function getActivity() {
         try {
@@ -49,7 +49,7 @@ function Activity({ update }) {
 
     useEffect(() => { getActivity() }, [update]);
 
-    
+
     // if the user isn't logged in, don't show data and prompt them to sign up or login
     if (!window.sessionStorage.getItem("userId")) {
         return (
@@ -58,7 +58,7 @@ function Activity({ update }) {
             </div>
         )
     }
-    
+
     // if we're still fetching the activity then say so
     if (!activity) return <p>loading activity</p>
 

@@ -1,5 +1,3 @@
-const knex = require("knex")(require("./knexfile"));
-
 // Clear and set up new run
 console.clear();
 console.log("New run-------------------------------------------------------------------------------------");
@@ -8,19 +6,13 @@ console.log("New run------------------------------------------------------------
 require('dotenv').config();
 const express = require("express");
 const cors = require('cors');
+const knex = require("knex")(require("./knexfile"));
 const app = express();
 const axios = require('axios');
 const PORT = process.env.PORT || 5050;
 app.use(cors());
 app.use(express.json());
-// const knex = require('./knexfile.js');
-// const qs = require('qs');
 
-let data = {
-    users: {},
-    activity: {},
-    playlists: { asdf: [] }
-};
 
 app.use((req, _res, next) => {
     const moment = new Date();
@@ -43,7 +35,6 @@ const getAuth = async () => {
     try {
         const token_url = 'https://accounts.spotify.com/api/token';
         const data = { 'grant_type': 'client_credentials' };
-        // const data = qs.stringify({ 'grant_type': 'client_credentials' });
 
         const response = await axios.post(token_url, data, {
             headers: {
@@ -93,8 +84,7 @@ app.get("/search/:search", async (req, res) => {
 
 app.post("/save", async (req, res) => {
     console.log("req.body from POST /save:", req.body);
-    // data.playlists.asdf.push(req.body.id);
-    // console.log(data);
+
     try {
         let response = await knex('song').insert(req.body.song)
         response = await knex('activity').insert(req.body.activity)
@@ -103,10 +93,6 @@ app.post("/save", async (req, res) => {
         console.log("error trying to put into db:", error)
     }
 })
-
-app.get("/data", (_req, res) => {
-    res.json(data);
-});
 
 app.get("/db/activity", async (_req, res) => {
     try {
@@ -136,7 +122,7 @@ app.post("/login", async (req, res) => {
         // }
         res.send(user);
     } catch (error) {
-        console.log("error server trying to log in:", error);
+        console.log("error server trying to log in:", error); // should probably send a 401 error or something
     }
 });
 
@@ -148,20 +134,17 @@ app.post("/signup", async (req, res) => {
         const user = await knex('user').where({ id: response[0] }).first();
         console.log("user from posting/signup:", user);
 
-        // if (!user) {
-        //     return res.status(401).json({ message: 'Credentials not found' });
-        // }
         res.send(user);
     } catch (error) {
-        console.log("error server trying to log in:", error);
+        console.log("error server trying to sign up:", error);
     }
 });
 
 app.get('/user/:userId', async (req, res) => {
-    // console.log("user from server getting pararms.userId:", req.params.userId);
+
     try {
         const user = await knex('user').where({ id: req.params.userId }).first();
-        // console.log("user from server getting user:", user);
+
         res.json(user)
     } catch (error) {
         console.log("something wrong server getting user info:", error)
@@ -169,7 +152,7 @@ app.get('/user/:userId', async (req, res) => {
 });
 
 app.put('/user/:userId', async (req, res) => {
-    // console.log("user from server getting pararms.userId:", req.params.userId);
+
     try {
         const user = await knex('user').where({ id: req.params.userId }).update(req.body);
         console.log("user from server getting user:", user);
