@@ -1,57 +1,79 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from "react";
 
 function AccountPage() {
     const navigate = useNavigate();
+    const [user, setUser] = useState([])
+
+    async function getUser() {
+        console.log("in getuser")
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`);
+            // console.log(response.data)
+            // response.data.name = response.data.name == "BLANK" ? "there" : response.data.name;
+            setUser(response.data);
+        } catch (error) {
+            console.log("something wrong client getting user info:", error)
+        }
+    }
 
     useEffect(() => {
         //need to use this to fetch the account details to either display or further update/modify
-
+        getUser();
     }, [])
     // const [update, setUpdate] = useState('');
 
     // useEffect (() => setUpdate('nothing'), [update]);
 
-    async function handleLogin (event) {
+    async function handleUpdateAccount(event) {
         event.preventDefault();
 
         try {
-            // const response = await axios.post(loginUrl, {
-            //     username: e.target.username.value,
-            //     password: e.target.password.value,
-            // });
-            // sessionStorage.setItem("JWTtoken", response.data.token);
+            console.log(event.target);
 
-            // setIsLoggedIn(true);
-            // setIsLoginError(false);
-            // setErrorMessage("");
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
-                username: event.target.username.value,
-                password: event.target.password.value
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`, {
+                name: event.target.name.value || user.name,
+                username: event.target.username.value || user.username,
+                password: event.target.password.value || user.password,
+                email: event.target.email.value || user.email
             });
             console.log(response.data)
 
-            if (response.data.id) {
-                window.sessionStorage.setItem("userId", response.data.id);
-                navigate('/home');
-            }
+            
 
-            navigate(0)
-            // window.sessionStorage.getItem("key");
+            getUser();
+            event.target.reset();
 
         } catch (error) {
             // setIsLoginError(true);
             // setErrorMessage(error.response.data.error.message);
-            console.log("error logging in somehow:", error);
+            console.log("error client updating account:", error);
         }
     };
 
     return (
         <main>
-            <h1>hi, [username here]</h1>
-
+            <h1>hi, {user.name}</h1>
+            <form onSubmit={handleUpdateAccount}>
+                <fieldset>
+                    <legend>Edit your details below</legend>
+                    <div>
+                        <input type="text" name="name" placeholder={`name: ${user.name}`} />
+                    </div>
+                    <div>
+                        <input type="text" name="username" placeholder={`username: ${user.username}`} />
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder={`password`} />
+                    </div>
+                    <div>
+                        <input type="text" name="email" placeholder={`email: ${user.email}`} />
+                    </div>
+                    <input type="submit" /> {/* this needs to be changed to display none */}
+                </fieldset>
+            </form>
         </main>
     )
 }
