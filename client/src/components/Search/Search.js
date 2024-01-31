@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function Search({updater}) {
     const [results, setResults] = useState([])
+    const navigate = useNavigate();
 
     async function handleFormSubmition(event) {
         event.preventDefault();
@@ -32,6 +34,14 @@ function Search({updater}) {
         // const package = {
 
         // };
+
+        // if the user isn't logged in take them to login or sign up
+        if (!window.sessionStorage.getItem("userId")) {
+            alert("Please sign up or login to add songs.")
+            navigate('/login');
+            return
+        }
+
         const activityData = {
             user_id: window.sessionStorage.getItem("userId"),         // need to dynamically get this from the login
             song_id: info.id
