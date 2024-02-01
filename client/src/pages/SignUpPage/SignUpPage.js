@@ -38,13 +38,13 @@ function SignUpPage() {
             <h1>SIGN UP</h1>
             <form onSubmit={handleSignup}>
                 <div>
-                    <input type="text" name="name" placeholder="name" />
-                </div>
-                <div>
                     <input type="text" name="username" placeholder="username" />
                 </div>
                 <div>
                     <input type="password" name="password" placeholder="password" />
+                </div>
+                <div>
+                    <input type="text" name="name" placeholder="name" />
                 </div>
                 <div>
                     <input type="text" name="email" placeholder="email" />
