@@ -186,5 +186,18 @@ app.get('/playlist/:playlistId', async (req, res) => {
     }
 });
 
+app.post('/playlist/:playlistId', async (req, res) => {
+
+    try {
+        const playlist = await knex('playlist').where({ playlist_group_id: req.params.playlistId }).insert(req.body);
+
+        console.log("server adding to playlist:", playlist)
+        res.json(playlist)
+        
+    } catch (error) {
+        console.log("server something wrong adding to playlist:", error)
+    }
+});
+
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));

@@ -9,6 +9,7 @@ function Search({ updater }) {
     const [results, setResults] = useState([])
     const navigate = useNavigate();
     const [showPlaylistChoices, setShowPlaylistChoices] = useState(false)
+    const [chosenSong, setChosenSong] = useState("")
     // const [playlists, setPlaylists] = useState([])
     // let playlists = [];
 
@@ -37,6 +38,7 @@ function Search({ updater }) {
             return
         }
 
+        setChosenSong(info.id);
         setShowPlaylistChoices(true);
         // getPlaylists();
         // createPlaylistOptions();
@@ -120,7 +122,7 @@ function Search({ updater }) {
             </div>
             {/* {showPlaylistChoices ? <div>playlists pop up?</div> : ""} */}
             {/* {showPlaylistChoices ? createPlaylistOptions : ""} */}
-            {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} /> : ""}
+            {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong}/> : ""}
         </div>
     )
 }

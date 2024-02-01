@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 
 
-function PlaylistChoices({updater}) {
+function PlaylistChoices({updater, song}) {
     const [playlists, setPlaylists] = useState([])
 
     // async function handleFormSubmition(event) {
@@ -40,7 +40,7 @@ function PlaylistChoices({updater}) {
     async function getPlaylists() {
         if (window.sessionStorage.getItem("userId")) {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/playlists/${window.sessionStorage.getItem("userId")}`)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/${window.sessionStorage.getItem("userId")}/playlists`)
                 // console.log(response.data)
                 setPlaylists(response.data)
             } catch (error) {
@@ -51,9 +51,23 @@ function PlaylistChoices({updater}) {
     }
 
 
-    async function handleAddToPlaylist (id) {
-        console.log("client received group id:", id);
-        updater(false);
+    async function handleAddToPlaylist (playlistId) {
+        console.log("client received group id:", playlistId);
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/playlist/${playlistId}`, {
+                playlist_group_id: playlistId,
+                song_id: song
+            });
+            console.log("client saving to playlist:", response.data)
+            
+            updater(false);
+        } catch (error) {
+            console.log ("client error saving to playlist:", error)
+        }
+
+
+
     }
 
 
