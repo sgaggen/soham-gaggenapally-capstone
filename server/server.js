@@ -162,7 +162,7 @@ app.put('/user/:userId', async (req, res) => {
     }
 });
 
-app.get('/playlists/:userId', async (req, res) => {
+app.get('/:userId/playlists', async (req, res) => {
 
     try {
         const playlists = await knex('user_playlist').where({ user_id: req.params.userId });

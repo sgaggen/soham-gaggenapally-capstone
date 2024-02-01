@@ -40,7 +40,7 @@ function Playlists() {
     async function getPlaylists() {
         if (window.sessionStorage.getItem("userId")) {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/playlists/${window.sessionStorage.getItem("userId")}`)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/${window.sessionStorage.getItem("userId")}/playlists`)
                 // console.log(response.data)
                 setPlaylists(response.data)
             } catch (error) {
@@ -67,9 +67,9 @@ function Playlists() {
             <div>these are your playlists:
                 {playlists.map(playlist =>
                     <div key={playlist.id}>
-                        <p>
+                        {/* <p>
                             playlist name: {playlist.playlist_name}
-                        </p>
+                        </p> */}
                         <Link to={`/playlist/${playlist.playlist_group_id}`}>playlist name: {playlist.playlist_name}</Link>
                     </div>)}
             </div>
