@@ -96,7 +96,24 @@ app.post("/save", async (req, res) => {
 
 app.get("/db/activity", async (_req, res) => {
     try {
-        const data = await knex('activity').orderBy('time', 'desc').limit(10);
+        const data = await knex('activity')
+        // .leftJoin("comment", "activity_id", "activity.id")
+        .orderBy('time', 'desc')
+        // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
+        .limit(10);
+        res.json(data);
+    } catch (error) {
+        console.log("server something wrong wtih accessing db it seems:", error)
+    }
+});
+
+app.get("/db/:activityId/comments", async (req, res) => {
+    try {
+        const data = await knex('comment').where({ activity_id: req.params.activityId })
+        // .leftJoin("comment", "activity_id", "activity.id")
+        // .orderBy('time', 'desc');
+        // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
+        // .limit(10);
         res.json(data);
     } catch (error) {
         console.log("server something wrong wtih accessing db it seems:", error)
