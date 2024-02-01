@@ -73,7 +73,11 @@ function Activity({ update }) {
                         <p>
                             SONG {action.song_id} by USER {action.user_id} at {action.time}
                         </p>
-                    </div>)}
+                        {action.comments ? <div>comments</div> : ""}
+                        {/* <h4>this is the comments div:</h4> */}
+                        
+                    </div>
+                )}
             </div>
         </div>
     )
