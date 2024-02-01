@@ -44,11 +44,11 @@ function AccountPage() {
             console.log("error client updating account:", error);
         }
     };
-
+    // use another div to show the actual info and put the editing part to the right
     return (
         <main>
             <h1>hi, {user.name}</h1>
-            <form onSubmit={handleUpdateAccount}>
+            <form onSubmit={handleUpdateAccount}> 
                 <fieldset>
                     <legend>Edit your details below</legend>
                     <div>
