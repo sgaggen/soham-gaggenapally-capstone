@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Activity({ update }) {
-    const [activity, setActivity] = useState([])
+function Playlists() {
+    const [playlists, setPlaylists] = useState([])
 
     // async function handleFormSubmition(event) {
     //     event.preventDefault();
@@ -37,46 +37,44 @@ function Activity({ update }) {
 
 
 
-    async function getActivity() {
+    async function getPlaylists() {
         if (window.sessionStorage.getItem("userId")) {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/${window.sessionStorage.getItem("userId")}/playlists`)
                 // console.log(response.data)
-                setActivity(response.data)
+                setPlaylists(response.data)
             } catch (error) {
                 console.log("couldn't get activity:", error)
             }
+
         }
     }
 
-    useEffect(() => { getActivity() }, [update]);
+    useEffect(() => { getPlaylists() }, []);
 
 
-    // if the user isn't logged in, don't show data and prompt them to sign up or login
+    // if the user isn't logged in, don't show anything
     if (!window.sessionStorage.getItem("userId")) {
-        return (
-            <div>
-                Please <Link to='/login'>log in</Link> or <Link to='/signup'>sign up</Link> to view recent activity.
-            </div>
-        )
+        return
     }
 
-    // otherwise if we're still fetching the activity then say so
-    if (!activity) return <p>loading activity</p>
+    // otherwise if we're still fetching the user's playlist then say so
+    if (!playlists) return <p>loading your playlists</p>
 
     return (
         <div>
-            <h3>this is the activity div</h3>
-            <div>this is some activity:
-                {activity.map(action =>
-                    <div key={action.id}>
-                        <p>
-                            SONG {action.song_id} by USER {action.user_id} at {action.time}
-                        </p>
+            <h3>this is the playlists div</h3>
+            <div>these are your playlists:
+                {playlists.map(playlist =>
+                    <div key={playlist.id}>
+                        {/* <p>
+                            playlist name: {playlist.playlist_name}
+                        </p> */}
+                        <Link to={`/playlist/${playlist.playlist_group_id}`}>playlist name: {playlist.playlist_name}</Link>
                     </div>)}
             </div>
         </div>
     )
 }
 
-export default Activity;
+export default Playlists;

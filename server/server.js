@@ -47,7 +47,7 @@ const getAuth = async () => {
         return response.data.access_token;
 
     } catch (error) {
-        console.log("failed to get auth token:", error);
+        console.log("server failed to get auth token:", error);
     }
 }
 
@@ -69,7 +69,7 @@ app.get("/search/:search", async (req, res) => {
         res.json(response.data);
 
     } catch (error) {
-        console.log("error in app.get /:search", error);
+        console.log("server error in app.get /:search", error);
     }
 });
 
@@ -83,14 +83,14 @@ app.get("/search/:search", async (req, res) => {
 // })
 
 app.post("/save", async (req, res) => {
-    console.log("req.body from POST /save:", req.body);
+    console.log("server req.body from POST /save:", req.body);
 
     try {
         let response = await knex('song').insert(req.body.song)
         response = await knex('activity').insert(req.body.activity)
         res.send(response.data);
     } catch (error) {
-        console.log("error trying to put into db:", error)
+        console.log("server error trying to put into db:", error)
     }
 })
 
@@ -99,7 +99,7 @@ app.get("/db/activity", async (_req, res) => {
         const data = await knex('activity').orderBy('time', 'desc').limit(10);
         res.json(data);
     } catch (error) {
-        console.log("something wrong wtih accessing db it seems:", error)
+        console.log("server something wrong wtih accessing db it seems:", error)
     }
 });
 
@@ -108,14 +108,14 @@ app.get("/db/:table", async (req, res) => {
         const data = await knex(req.params.table);
         res.json(data);
     } catch (error) {
-        console.log("something wrong wtih accessing db it seems:", error)
+        console.log("server something wrong wtih accessing db it seems:", error)
     }
 });
 
 app.post("/login", async (req, res) => {
     try {
         const user = await knex('user').where({ username: req.body.username }).first();
-        console.log("user from posting/login:", user);
+        console.log("server user from posting/login:", user);
 
         // if (!user) {
         //     return res.status(401).json({ message: 'Credentials not found' });
@@ -132,7 +132,7 @@ app.post("/signup", async (req, res) => {
         console.log("response from posting/signup:", response[0]);
 
         const user = await knex('user').where({ id: response[0] }).first();
-        console.log("user from posting/signup:", user);
+        console.log("server user from posting/signup:", user);
 
         res.send(user);
     } catch (error) {
@@ -159,6 +159,43 @@ app.put('/user/:userId', async (req, res) => {
         res.json(user)
     } catch (error) {
         console.log("something wrong server updating user info:", error)
+    }
+});
+
+app.get('/:userId/playlists', async (req, res) => {
+
+    try {
+        const playlists = await knex('user_playlist').where({ user_id: req.params.userId });
+
+        console.log("server getting user's playlists:", playlists)
+        res.json(playlists)
+    } catch (error) {
+        console.log("something wrong server getting user's playlists:", error)
+    }
+});
+
+app.get('/playlist/:playlistId', async (req, res) => {
+
+    try {
+        const playlist = await knex('playlist').where({ playlist_group_id: req.params.playlistId });
+
+        console.log("server getting one playlist:", playlist)
+        res.json(playlist)
+    } catch (error) {
+        console.log("something wrong server getting a playlist:", error)
+    }
+});
+
+app.post('/playlist/:playlistId', async (req, res) => {
+
+    try {
+        const playlist = await knex('playlist').where({ playlist_group_id: req.params.playlistId }).insert(req.body);
+
+        console.log("server adding to playlist:", playlist)
+        res.json(playlist)
+        
+    } catch (error) {
+        console.log("server something wrong adding to playlist:", error)
     }
 });
 
