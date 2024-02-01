@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/account" element={<AccountPage />} />
+                <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
                 {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>
             {/* <Footer /> */}
