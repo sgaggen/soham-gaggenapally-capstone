@@ -27,9 +27,9 @@ exports.seed = async function (knex) {
         {
             "id": 3,
             "name": "BLANK",
-            "username": "testu1",
-            "password": "testp1",
-            "email": "teste1",
+            "username": "testu4",
+            "password": "testp4",
+            "email": "teste4",
             "created_at": "2024-01-31 15:29:27.000",
             "updated_at": "2024-01-31 15:29:27.000"
         },
