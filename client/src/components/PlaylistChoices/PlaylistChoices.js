@@ -50,6 +50,13 @@ function PlaylistChoices({updater}) {
         }
     }
 
+
+    async function handleAddToPlaylist (id) {
+        console.log("client received group id:", id);
+        updater(false);
+    }
+
+
     useEffect(() => { getPlaylists() }, []);
 
 
@@ -65,7 +72,7 @@ function PlaylistChoices({updater}) {
         <div>
             <div>which playlist would you like to save this song to?
                 {playlists.map(playlist =>
-                    <div key={playlist.id} onClick={() => updater(false)}>
+                    <div key={playlist.id} onClick={() => handleAddToPlaylist(playlist.playlist_group_id)}>
                         <p>
                             playlist name: {playlist.playlist_name}
                         </p>
