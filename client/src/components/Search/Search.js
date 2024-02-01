@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Playlists from '../Playlists/Playlists';
+// import Playlists from '../Playlists/Playlists';
 import PlaylistChoices from '../PlaylistChoices/PlaylistChoices';
 
 
@@ -10,7 +10,7 @@ function Search({ updater }) {
     const navigate = useNavigate();
     const [showPlaylistChoices, setShowPlaylistChoices] = useState(false)
     // const [playlists, setPlaylists] = useState([])
-    let playlists = [];
+    // let playlists = [];
 
     // useEffect(() => console.log("in useeffect for search for showing playlist options"), [showPlaylistChoices])
 
@@ -38,7 +38,7 @@ function Search({ updater }) {
         }
 
         setShowPlaylistChoices(true);
-        getPlaylists();
+        // getPlaylists();
         // createPlaylistOptions();
 
         const activityData = {
@@ -67,37 +67,34 @@ function Search({ updater }) {
         }
     }
 
-    async function getPlaylists() {
-        if (window.sessionStorage.getItem("userId")) {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/playlists/${window.sessionStorage.getItem("userId")}`)
-                console.log("client getPlaylists:", response.data);
-                playlists = response.data;
-                // return response.data
-            } catch (error) {
-                console.log("couldn't get activity:", error)
-            }
+    // async function getPlaylists() {
+    //     if (window.sessionStorage.getItem("userId")) {
+    //         try {
+    //             const response = await axios.get(`${process.env.REACT_APP_API_URL}/playlists/${window.sessionStorage.getItem("userId")}`)
+    //             console.log("client getPlaylists:", response.data);
+    //             playlists = response.data;
+    //             // return response.data
+    //         } catch (error) {
+    //             console.log("couldn't get activity:", error)
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
-    async function createPlaylistOptions() {
-        // await getPlaylists(); 
+    // async function createPlaylistOptions() {
+    //     // await getPlaylists(); 
 
-        // console.log("client createPlaylistOptions playlists:", playlists);
+    //     // console.log("client createPlaylistOptions playlists:", playlists);
 
-        playlists.map(playlist =>
-            <div key={playlist.id} onClick={setShowPlaylistChoices(false)}>
-                <p>
-                    playlist name: {playlist.playlist_name}
-                </p>
-            </div>)
+    //     playlists.map(playlist =>
+    //         <div key={playlist.id} onClick={setShowPlaylistChoices(false)}>
+    //             <p>
+    //                 playlist name: {playlist.playlist_name}
+    //             </p>
+    //         </div>)
 
-
-
-
-        // setShowPlaylistChoices(false);
-    }
+    //     // setShowPlaylistChoices(false);
+    // }
 
     return (
         <div>

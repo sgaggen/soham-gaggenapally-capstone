@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 function PlaylistChoices({updater}) {
@@ -63,8 +63,7 @@ function PlaylistChoices({updater}) {
 
     return (
         <div>
-            <h3>this is the playlist choices div</h3>
-            <div>these are your playlist choices:
+            <div>which playlist would you like to save this song to?
                 {playlists.map(playlist =>
                     <div key={playlist.id} onClick={() => updater(false)}>
                         <p>

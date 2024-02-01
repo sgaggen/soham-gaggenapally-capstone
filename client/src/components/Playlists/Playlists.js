@@ -70,6 +70,7 @@ function Playlists() {
                         <p>
                             playlist name: {playlist.playlist_name}
                         </p>
+                        <Link to={`/playlist/${playlist.playlist_group_id}`}>playlist name: {playlist.playlist_name}</Link>
                     </div>)}
             </div>
         </div>
