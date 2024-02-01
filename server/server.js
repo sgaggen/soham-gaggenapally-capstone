@@ -193,9 +193,23 @@ app.post('/playlist/:playlistId', async (req, res) => {
 
         console.log("server adding to playlist:", playlist)
         res.json(playlist)
-        
+
     } catch (error) {
         console.log("server something wrong adding to playlist:", error)
+    }
+});
+
+app.delete('/playlist/:songId', async (req, res) => {
+    console.log("server delete song from playlist req params:", req.params.songId);
+
+    try {
+        const playlist = await knex('playlist').where({ id: req.params.songId }).del();
+
+        console.log("server deleting from playlist:", playlist)
+        res.json(playlist)
+
+    } catch (error) {
+        console.log("server something wrong deleting from playlist:", error)
     }
 });
 

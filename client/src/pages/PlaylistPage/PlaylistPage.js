@@ -15,7 +15,7 @@ function PlaylistPage() {
             // need to add handling here to check user has access to the playlist they've clicked
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/playlist/${playlistId}`);
             setPlaylist(response.data);
-            console.log("client getting playlist:",response.data);
+            console.log("client getting playlist:", response.data);
         } catch (error) {
             console.log("something wrong client getting playlist:", error)
         }
@@ -26,23 +26,47 @@ function PlaylistPage() {
     }, [])
 
 
-    // async function handleUpdateAccount(event) {
-    //     event.preventDefault();
-    //     try {
-    //         console.log(event.target);
-    //         const response = await axios.put(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`, {
-    //             name: event.target.name.value || user.name,
-    //             username: event.target.username.value || user.username,
-    //             password: event.target.password.value || user.password,
-    //             email: event.target.email.value || user.email
-    //         });
-    //         console.log(response.data)
-    //         getPlaylist();
-    //         event.target.reset();
-    //     } catch (error) {
-    //         console.log("error client updating account:", error);
-    //     }
-    // };
+
+    async function handleRemoveClick(songId) {
+
+        // // if the user isn't logged in take them to login or sign up
+        // if (!window.sessionStorage.getItem("userId")) {
+        //     alert("Please sign up or login to add songs.")
+        //     navigate('/login');
+        //     return
+        // }
+
+        // setChosenSong(info.id);
+        // setShowPlaylistChoices(true);
+        // // getPlaylists();
+        // // createPlaylistOptions();
+
+        // const activityData = {
+        //     user_id: window.sessionStorage.getItem("userId"),
+        //     song_id: info.id
+        // }
+
+        // const songData = {
+        //     id: info.id,
+        //     name: info.name,
+        //     artist: info.artists[0].name,
+        //     image: info.album.images[0].url
+        // }
+
+        console.log("client top of handleremoveclick");
+
+        try {
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/playlist/${songId}`)
+
+            console.log("after tring to delete:", response);
+            // updater("trigger re-render");
+            getPlaylist()
+            console.log("client end of try of remove song");
+        } catch (error) {
+            console.log("client error removing song from playlist:", error);
+        }
+    }
+
 
     return (
         <main>
@@ -53,7 +77,7 @@ function PlaylistPage() {
                         <p>
                             SONG {song.song_id}
                         </p>
-                        <button onClick={() => console.log("client need to handle remove click")}> - </button>
+                        <button onClick={() => handleRemoveClick(song.id)}> - </button>
                     </div>)}
             </div>
         </main>
