@@ -162,5 +162,17 @@ app.put('/user/:userId', async (req, res) => {
     }
 });
 
+app.get('/playlists/:userId', async (req, res) => {
+
+    try {
+        const playlists = await knex('user_playlist').where({ user_id: req.params.userId });
+
+        console.log("getting user's playlists:", playlists)
+        res.json(playlists)
+    } catch (error) {
+        console.log("something wrong server getting user's playlists:", error)
+    }
+});
+
 // Spin up server
 app.listen(PORT, () => console.log(`running at http://localhost:${PORT}`));
