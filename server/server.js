@@ -94,16 +94,80 @@ app.post("/save", async (req, res) => {
     }
 })
 
+// app.get("/db/activity", async (_req, res) => {
+//     try {
+//         const data = await knex('activity')
+//             // .leftJoin("comment", "activity_id", "activity.id")
+//             .orderBy('time', 'desc')
+//             // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
+//             .limit(4);
+
+//         // const commentedData = data.map(async element => {
+//         //     const commentData = await knex('comment').where({activity_id: element.id});
+//         //     // console.log("commentData|", commentData);
+//         //     // if (commentData.length > 0) console.log("commentData exists");
+//         //     if (commentData.length > 0) element.comments = commentData;
+//         //     return element
+//         // })
+
+//         // console.log("server GET/activity:", commentedData);
+//         console.log("server GET/activity:", data);
+//         res.json(data);
+//     } catch (error) {
+//         console.log("server something wrong wtih accessing db activity it seems:", error)
+//     }
+// });
+
 app.get("/db/activity", async (_req, res) => {
     try {
         const data = await knex('activity')
-        // .leftJoin("comment", "activity_id", "activity.id")
-        .orderBy('time', 'desc')
-        // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
-        .limit(10);
-        res.json(data);
+            .leftJoin("comment", "comment.activity_id", "activity.id")
+            .orderBy('time', 'desc')
+            .select('activity.*', 'comment.id as comment_id', 'comment.created_at as comment_created_at', 'comment.user_id as comment_user_id', 'comment.content as comment_content', 'comment.activity_id as comment_activtiy_id')
+            .limit(10);
+
+
+        const commentedData = data.reduce((result, current) => {
+            const existingEntry = result.find(entry => entry.id === current.id);
+
+            if (existingEntry) {
+                // append the comment to the existing entry only if it exists
+                if (current.comment_id !== null) {
+                    existingEntry.comments.push({
+                        comment_id: current.comment_id,
+                        comment_created_at: current.comment_created_at,
+                        comment_user_id: current.comment_user_id,
+                        comment_content: current.comment_content,
+                    });
+                }
+            } else {
+                // create a new entry
+                const newEntry = {
+                    id: current.id,
+                    user_id: current.user_id,
+                    song_id: current.song_id,
+                    time: current.time,
+                };
+
+                // append the comment if it exists
+                if (current.comment_id !== null) {
+                    newEntry.comments = [{
+                        comment_id: current.comment_id,
+                        comment_created_at: current.comment_created_at,
+                        comment_user_id: current.comment_user_id,
+                        comment_content: current.comment_content,
+                    }];
+                }
+
+                result.push(newEntry);
+            }
+
+            return result;
+        }, []);
+
+        res.json(commentedData)
     } catch (error) {
-        console.log("server something wrong wtih accessing db it seems:", error)
+        console.log("server something wrong wtih accessing db activity it seems:", error)
     }
 });
 

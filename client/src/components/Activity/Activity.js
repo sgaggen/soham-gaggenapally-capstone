@@ -40,16 +40,16 @@ function Activity({ update }) {
     async function getActivity() {
         if (window.sessionStorage.getItem("userId")) {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`)
-                // console.log(response.data)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`);
                 setActivity(response.data)
+                
             } catch (error) {
-                console.log("couldn't get activity:", error)
+                console.log("client couldn't get activity:", error)
             }
         }
     }
 
-    useEffect(() => { getActivity() }, [update]);
+    useEffect(() => { getActivity(); console.log("client in useffect for activity", Date.now()); }, [update]);
 
 
     // if the user isn't logged in, don't show data and prompt them to sign up or login
@@ -64,6 +64,7 @@ function Activity({ update }) {
     // otherwise if we're still fetching the activity then say so
     if (!activity) return <p>loading activity</p>
 
+    console.log("client before activity return, activity:", activity, Date.now());
     return (
         <div>
             <h3>this is the activity div</h3>
@@ -71,11 +72,10 @@ function Activity({ update }) {
                 {activity.map(action =>
                     <div key={action.id}>
                         <p>
-                            SONG {action.song_id} by USER {action.user_id} at {action.time}
+                            SONG {action.song_id} by USER {action.user_id} at {action.time} 
                         </p>
                         {action.comments ? <div>comments</div> : ""}
-                        {/* <h4>this is the comments div:</h4> */}
-                        
+
                     </div>
                 )}
             </div>
