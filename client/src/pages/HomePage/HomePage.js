@@ -12,9 +12,9 @@ function HomePage() {
     return (
         <main className="home">
             {/* <h1>home page yay</h1> */}
-            <article className="home__search">
+            {/* <article className="home__search">
                 <Search updater={setUpdate} />
-            </article>
+            </article> */}
             <section className="home__content">
                 <Activity update={update} />
                 <Playlists />

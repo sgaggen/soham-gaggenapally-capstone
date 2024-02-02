@@ -58,7 +58,7 @@ app.get("/search/:search", async (req, res) => {
         // need to add handling so this automatically refreshes on timeout
         access_token = access_token ? access_token : await getAuth();   // first initialized on line current-5
 
-        const url = `https://api.spotify.com/v1/search?q=${req.params.search}&type=track&market=US&limit=3`;
+        const url = `https://api.spotify.com/v1/search?q=${req.params.search}&type=track&market=US&limit=10`;
 
         const response = await axios.get(url, {
             headers: {

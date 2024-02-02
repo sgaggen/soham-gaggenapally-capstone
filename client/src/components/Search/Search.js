@@ -17,16 +17,19 @@ function Search({ updater }) {
 
     async function handleSearch(event) {
         event.preventDefault();
+        navigate(`/search/${event.target.search.value}`);
+        event.target.reset();
+        return
 
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
-            console.log(response.data.tracks.items);
-            setResults(response.data.tracks.items);
+        // try {
+        //     const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
+        //     console.log(response.data.tracks.items);
+        //     setResults(response.data.tracks.items);
 
-            // event.target.reset();
-        } catch (error) {
-            console.log("search didn't work from client:", error)
-        }
+        //     // event.target.reset();
+        // } catch (error) {
+        //     console.log("search didn't work from client:", error)
+        // }
     }
 
     async function handleAddClick(info) {
@@ -100,9 +103,9 @@ function Search({ updater }) {
 
     return (
         <div>
-            <h3>this is the search bar div</h3>
+            {/* <h3>this is the search bar div</h3> */}
             <form onSubmit={handleSearch}>
-                <label htmlFor="search">Search</label>
+                <label htmlFor="search" className='invisible'>Search</label>
                 <input
                     type="text"
                     name="search"
@@ -111,7 +114,7 @@ function Search({ updater }) {
                     placeholder="search for a song"
                 />
             </form>
-            <div>these are the results:
+            <div>
                 {results.map(result =>
                     <div key={result.id}>
                         <p>

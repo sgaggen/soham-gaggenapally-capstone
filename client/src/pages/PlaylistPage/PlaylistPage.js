@@ -71,7 +71,7 @@ function PlaylistPage() {
 
     return (
         <main className='playlist'>
-            <h1>this is your [CHANGE TO DYNAMIC NAME] playlist</h1>
+            <h1>this is your playlist</h1>
             <div className='song__results'>these are the songs:
                 {playlist.map(song =>
                     <div key={song.id} className='song__row'>

@@ -22,8 +22,10 @@ h1 {
     font-weight: 300;
     font-size: 5rem;
     // line-height: 35vh;
-    padding-top: 15vh;
+    // padding-top: calc(15vh - 5rem);
+    padding-top: 10vh;
     padding-bottom: 5vh;
+    text-align: center;
 }
 
 a {
