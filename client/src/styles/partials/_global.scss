@@ -1,7 +1,9 @@
 @use './variables' as *;
 @use 'fonts' as *;
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
 }
@@ -19,10 +21,19 @@ body {
 h1 {
     font-weight: 300;
     font-size: 5rem;
-    line-height: 25vh;
+    // line-height: 35vh;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
 }
 
-input, input::placeholder, textarea, textarea::placeholder, select, button, input[type='text'], input[type='password'] {
+input,
+input::placeholder,
+textarea,
+textarea::placeholder,
+select,
+button,
+input[type='text'],
+input[type='password'] {
     font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
     background-color: $darkergray;
     color: $white;
@@ -35,11 +46,31 @@ input, input::placeholder, textarea, textarea::placeholder, select, button, inpu
     font-size: 1rem;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     background-color: transparent;
     // font-size: 5rem;
 }
 
+.button {
+    &--add, &--remove {
+        border-radius: 50%;
+        aspect-ratio: 1;
+        width: 2.5rem;
+    }
+}
+
 .invisible {
     display: none;
+}
+
+.song {
+    background-color: $darkergray;
+    padding: 0.25rem 0;
+    width: 90%;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    height: 2.5rem;
+    text-align: center;
+    padding-top: 0.5rem;
 }

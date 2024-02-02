@@ -1,3 +1,4 @@
+import './PlaylistPage.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -69,15 +70,15 @@ function PlaylistPage() {
 
 
     return (
-        <main>
+        <main className='playlist'>
             <h1>this is your [CHANGE TO DYNAMIC NAME] playlist</h1>
-            <div>these are the results:
+            <div className='song__results'>these are the songs:
                 {playlist.map(song =>
-                    <div key={song.id}>
-                        <p>
+                    <div key={song.id} className='song__row'>
+                        <p className='song'>
                             SONG {song.song_id}
                         </p>
-                        <button onClick={() => handleRemoveClick(song.id)}> - </button>
+                        <button className='button--remove' onClick={() => handleRemoveClick(song.id)}> - </button>
                     </div>)}
             </div>
         </main>
