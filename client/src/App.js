@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 function App() {
     return (
@@ -18,6 +19,8 @@ function App() {
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/account" element={<AccountPage />} />
                 <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
+                {/* <Route path="/search/*" element={<SearchPage />} /> */}
+                <Route path="/search/:query" element={<SearchPage />} />
                 {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>
             {/* <Footer /> */}
