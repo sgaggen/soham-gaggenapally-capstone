@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Comments from '../Comments/Comments';
 
 
 function Activity({ update }) {
@@ -49,7 +50,7 @@ function Activity({ update }) {
         }
     }
 
-    useEffect(() => { getActivity(); console.log("client in useffect for activity", Date.now()); }, [update]);
+    useEffect(() => { getActivity() }, [update]);
 
 
     // if the user isn't logged in, don't show data and prompt them to sign up or login
@@ -64,7 +65,7 @@ function Activity({ update }) {
     // otherwise if we're still fetching the activity then say so
     if (!activity) return <p>loading activity</p>
 
-    console.log("client before activity return, activity:", activity, Date.now());
+    // console.log("client in activity being sent to comments:", comments);
     return (
         <div>
             <h3>this is the activity div</h3>
@@ -75,6 +76,7 @@ function Activity({ update }) {
                             SONG {action.song_id} by USER {action.user_id} at {action.time} 
                         </p>
                         {action.comments ? <div>comments</div> : ""}
+                        <Comments existingComments={action.comments} />
 
                     </div>
                 )}
