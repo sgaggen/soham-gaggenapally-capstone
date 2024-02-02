@@ -18,7 +18,8 @@ body {
 
 h1 {
     font-weight: 300;
-    font-size: 4rem;
+    font-size: 5rem;
+    line-height: 25vh;
 }
 
 input, input::placeholder, textarea, textarea::placeholder, select, button, input[type='text'], input[type='password'] {
@@ -29,10 +30,16 @@ input, input::placeholder, textarea, textarea::placeholder, select, button, inpu
     outline: none;
     text-align: center;
     padding: 0.5rem;
-    margin: 0.25rem 0;
+    // margin: 0.25rem 0;
     border-radius: 0.5rem;
+    font-size: 1rem;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
     background-color: transparent;
+    // font-size: 5rem;
+}
+
+.invisible {
+    display: none;
 }

@@ -1,3 +1,5 @@
+import './Header.scss';
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +14,7 @@ function Header() {
 
     return (
         <header>
-            HearHere
+            <Link to='/home'>HearHere</Link>
             <nav>
                 <Link to='/home'>Home</Link>
                 {/* <Link to='/login'>Log In</Link>

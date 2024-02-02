@@ -1,0 +1,27 @@
+@use '../../styles/partials/variables' as *;
+
+header {
+    // background-color: red;
+    display: flex;
+    justify-content: space-between;
+    // width: 90%;
+    margin: 1% 2%;
+
+    
+    a {
+        text-decoration: none;
+        color: $white;
+    
+        &:hover {
+            color: gray;
+        }
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    // width: 30%;
+    gap: 2rem;
+    
+}
