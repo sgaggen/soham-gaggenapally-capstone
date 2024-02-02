@@ -59,10 +59,20 @@ textarea::placeholder {
 }
 
 .button {
+    &:hover{
+        background-color: $lightgray;
+        cursor: pointer;
+    }
+
     &--add, &--remove {
         border-radius: 50%;
         aspect-ratio: 1;
         width: 2.5rem;
+
+        &:hover{
+            background-color: $lightgray;
+            cursor: pointer;
+        }
     }
 }
 

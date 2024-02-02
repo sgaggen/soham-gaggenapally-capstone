@@ -73,6 +73,7 @@ function Playlists() {
                         </p> */}
                         <Link to={`/playlist/${playlist.playlist_group_id}`} className='song'>{playlist.playlist_name}</Link>
                     </div>)}
+                <button className="song button--add">+</button>
             </div>
         </div>
     )
