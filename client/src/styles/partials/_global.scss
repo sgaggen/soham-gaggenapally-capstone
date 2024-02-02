@@ -26,6 +26,12 @@ h1 {
     padding-bottom: 5vh;
 }
 
+a {
+    text-decoration: none;
+    color: $white;
+    // padding: inherit;
+}
+
 input,
 input::placeholder,
 textarea,

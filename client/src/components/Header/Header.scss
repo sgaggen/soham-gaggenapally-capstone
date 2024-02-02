@@ -5,13 +5,10 @@ header {
     display: flex;
     justify-content: space-between;
     // width: 90%;
-    margin: 1% 7%;
+    margin: 0.75rem 7%;
 
 
     a {
-        text-decoration: none;
-        color: $white;
-    
         &:hover {
             color: gray;
         }

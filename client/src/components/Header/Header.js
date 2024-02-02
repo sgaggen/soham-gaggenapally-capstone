@@ -2,6 +2,7 @@ import './Header.scss';
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Search from '../Search/Search';
 
 function Header() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Header() {
     return (
         <header>
             <Link to='/home'>HearHere</Link>
+            {/* <Search /> */}
             <nav>
                 <Link to='/home'>Home</Link>
                 {/* <Link to='/login'>Log In</Link>

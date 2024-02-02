@@ -1,0 +1,22 @@
+.activity {
+    // margin: -5% 7% 0 7%;
+    margin-top: -5%;
+    width: 100%;
+
+    .song {
+        width: 100%;
+
+        &__results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        &__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    }
+}

@@ -57,11 +57,7 @@ function LoginPage() {
                 <div>
                     <input type="password" name="password" placeholder="password" />
                 </div>
-                <input type="submit" className='invisible' /> {/* this needs to be changed to display none */}
-
-                {/* <button type="submit">
-                    Login
-                </button> */}
+                <input type="submit" className='invisible' />
             </form>
         </main>
     )

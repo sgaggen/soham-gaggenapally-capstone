@@ -50,11 +50,7 @@ function SignUpPage() {
                 <div>
                     <input type="text" name="email" placeholder="email" />
                 </div>
-                <input type="submit" className='invisible' /> {/* this needs to be changed to display none */}
-
-                {/* <button type="submit">
-                    Sign Up
-                </button> */}
+                <input type="submit" className='invisible' />
             </form>
         </main>
     )
