@@ -1,0 +1,24 @@
+@use '../../styles/partials/variables' as *;
+
+header {
+    // background-color: red;
+    display: flex;
+    justify-content: space-between;
+    // width: 90%;
+    margin: 0.75rem 7%;
+
+
+    a {
+        &:hover {
+            color: gray;
+        }
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    // width: 30%;
+    gap: 2rem;
+    
+}

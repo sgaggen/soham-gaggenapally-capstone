@@ -1,3 +1,4 @@
+import './LoginPage.scss';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +48,7 @@ function LoginPage() {
     };
 
     return (
-        <main>
+        <main className='login'>
             <h1>LOGIN</h1>
             <form onSubmit={handleLogin}>
                 <div>
@@ -56,11 +57,7 @@ function LoginPage() {
                 <div>
                     <input type="password" name="password" placeholder="password" />
                 </div>
-                <input type="submit" /> {/* this needs to be changed to display none */}
-
-                {/* <button type="submit">
-                    Login
-                </button> */}
+                <input type="submit" className='invisible' />
             </form>
         </main>
     )

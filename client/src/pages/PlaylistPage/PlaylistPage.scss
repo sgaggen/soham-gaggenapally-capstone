@@ -1,0 +1,18 @@
+.playlist {
+    margin: -5% 7% 0 7%;
+
+    .song {
+        &__results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        &__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    }
+}

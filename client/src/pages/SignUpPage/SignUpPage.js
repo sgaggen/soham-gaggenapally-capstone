@@ -1,3 +1,4 @@
+import './SignUpPage.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ function SignUpPage() {
 
         try {
 
-            
+
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
                 name: event.target.name.value,
                 username: event.target.username.value,
@@ -34,7 +35,7 @@ function SignUpPage() {
     };
 
     return (
-        <main>
+        <main className='signup'>
             <h1>SIGN UP</h1>
             <form onSubmit={handleSignup}>
                 <div>
@@ -49,11 +50,7 @@ function SignUpPage() {
                 <div>
                     <input type="text" name="email" placeholder="email" />
                 </div>
-                <input type="submit" /> {/* this needs to be changed to display none */}
-
-                {/* <button type="submit">
-                    Sign Up
-                </button> */}
+                <input type="submit" className='invisible' />
             </form>
         </main>
     )

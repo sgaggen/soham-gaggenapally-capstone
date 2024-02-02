@@ -63,7 +63,7 @@ function AccountPage() {
                     <div>
                         <input type="text" name="email" placeholder={`email: ${user.email}`} />
                     </div>
-                    <input type="submit" /> {/* this needs to be changed to display none */}
+                    <input type="submit" className='invisible' />
                 </fieldset>
             </form>
         </main>

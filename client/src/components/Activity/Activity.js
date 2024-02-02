@@ -1,3 +1,4 @@
+import './Activity.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -67,21 +68,21 @@ function Activity({ update }) {
 
     // console.log("client in activity being sent to comments:", comments);
     return (
-        <div>
-            <h3>this is the activity div</h3>
-            <div>this is some activity:
+        <section className='activity'>
+            <h1>activity</h1>
+            <div className='song__results'>this is some activity:
                 {activity.map(action =>
                     <div key={action.id}>
-                        <p>
+                        <p className='song'>
                             SONG {action.song_id} by USER {action.user_id} at {action.time} 
                         </p>
-                        {action.comments ? <div>comments</div> : ""}
+                        {/* {action.comments ? <div>comments</div> : ""} */}
                         <Comments existingComments={action.comments} />
 
                     </div>
                 )}
             </div>
-        </div>
+        </section>
     )
 }
 

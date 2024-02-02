@@ -1,3 +1,4 @@
+import './Playlists.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -62,16 +63,17 @@ function Playlists() {
     if (!playlists) return <p>loading your playlists</p>
 
     return (
-        <div>
-            <h3>this is the playlists div</h3>
-            <div>these are your playlists:
+        <div className='playlists'>
+            <h1>playlists</h1>
+            <div className='song__results'>these are your playlists:
                 {playlists.map(playlist =>
                     <div key={playlist.id}>
                         {/* <p>
                             playlist name: {playlist.playlist_name}
                         </p> */}
-                        <Link to={`/playlist/${playlist.playlist_group_id}`}>playlist name: {playlist.playlist_name}</Link>
+                        <Link to={`/playlist/${playlist.playlist_group_id}`} className='song'>{playlist.playlist_name}</Link>
                     </div>)}
+                <button className="song button--add">+</button>
             </div>
         </div>
     )
