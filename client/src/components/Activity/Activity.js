@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Comments from '../Comments/Comments';
 
 
 function Activity({ update }) {
@@ -40,11 +41,11 @@ function Activity({ update }) {
     async function getActivity() {
         if (window.sessionStorage.getItem("userId")) {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`)
-                // console.log(response.data)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`);
                 setActivity(response.data)
+                
             } catch (error) {
-                console.log("couldn't get activity:", error)
+                console.log("client couldn't get activity:", error)
             }
         }
     }
@@ -64,6 +65,7 @@ function Activity({ update }) {
     // otherwise if we're still fetching the activity then say so
     if (!activity) return <p>loading activity</p>
 
+    // console.log("client in activity being sent to comments:", comments);
     return (
         <div>
             <h3>this is the activity div</h3>
@@ -71,9 +73,13 @@ function Activity({ update }) {
                 {activity.map(action =>
                     <div key={action.id}>
                         <p>
-                            SONG {action.song_id} by USER {action.user_id} at {action.time}
+                            SONG {action.song_id} by USER {action.user_id} at {action.time} 
                         </p>
-                    </div>)}
+                        {action.comments ? <div>comments</div> : ""}
+                        <Comments existingComments={action.comments} />
+
+                    </div>
+                )}
             </div>
         </div>
     )
