@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import Search from '../../components/Search/Search';
 import './SearchPage.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
