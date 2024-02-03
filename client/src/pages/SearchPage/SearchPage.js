@@ -7,8 +7,11 @@ import PlaylistChoices from '../../components/PlaylistChoices/PlaylistChoices';
 
 
 function SearchPage() {
-    const [query, setQuery] = useState(useParams().query)
-    const [results, setResults] = useState([])
+    console.log("actual top of searchpage, params.query:",useParams().query);
+    const query = useParams().query;
+    // const [query, setQuery] = useState(useParams().query)
+    const [results, setResults] = useState(null)
+    console.log("actual top of searchpage, query:",query,'results:',results);
     const navigate = useNavigate();
     const [showPlaylistChoices, setShowPlaylistChoices] = useState(false)
     const [chosenSong, setChosenSong] = useState("")
