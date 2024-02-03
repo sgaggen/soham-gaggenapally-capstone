@@ -77,7 +77,7 @@ app.get("/search/:search", async (req, res) => {
 app.get("/auto/:search", async (req, res) => {
     try {
         const response = await axios.get(`https://musicautocomplete.deno.dev/search?q=${req.params.search}`)
-        
+
         response.data.error ? res.send('No results found') : res.json(response.data);
     } catch (error) {
         console.log("server error in autocomplete get:", error);
