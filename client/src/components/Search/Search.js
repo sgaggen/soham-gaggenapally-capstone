@@ -10,6 +10,10 @@ function Search() {
         return
     }
 
+    async function handleInputChange(event) {
+        console.log('client in handleinput change, input:', event.target);
+    }
+
 
     return (
         <div>
@@ -21,6 +25,7 @@ function Search() {
                     id="search"
                     // className={`form__input ${someError && 'form__input--invalid'}`}
                     placeholder="search for a song"
+                    onChange={handleInputChange}
                 />
             </form>
         </div>
