@@ -1,3 +1,4 @@
+import './Search.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
@@ -36,14 +37,14 @@ function Search() {
             } catch (error) {
                 console.log('client error in auto complete:', error);
             }
-            
+
         }
 
     }
 
 
     return (
-        <div>
+        <div className='search-bar'>
             <form onSubmit={handleSearch}>
                 <label htmlFor="search" className='invisible'>Search</label>
                 <input
@@ -53,10 +54,21 @@ function Search() {
                     // className={`form__input ${someError && 'form__input--invalid'}`}
                     placeholder="search for a song"
                     onChange={handleInputChange}
+                    onBlur={() => setAutocomplete([])}
                 />
             </form>
-            <div>
-                {autocomplete.map(result => <Link to={`/search/${result}`} key={uuidv4()} onClick={() => setAutocomplete([])}>{result}</Link>)}
+            <div className='autocomplete'>
+                {autocomplete.map(result =>
+                    <Link
+                        to={`/search/${result}`}
+                        key={uuidv4()}
+                        onClick={() => setAutocomplete([])}
+                        // className='autocomplete__result button--add song'
+                        className='autocomplete__result'
+                    >
+                        {result}
+                    </Link>
+                )}
             </div>
         </div>
     )
