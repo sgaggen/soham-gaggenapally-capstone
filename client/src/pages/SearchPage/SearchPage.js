@@ -6,11 +6,11 @@ import PlaylistChoices from '../../components/PlaylistChoices/PlaylistChoices';
 
 
 function SearchPage() {
-    console.log("actual top of searchpage, params.query:",useParams().query);
+    console.log("actual top of searchpage, params.query:", useParams().query);
     const query = useParams().query;
     // const [query, setQuery] = useState(useParams().query)
     const [results, setResults] = useState(null)
-    console.log("actual top of searchpage, query:",query,'results:',results);
+    console.log("actual top of searchpage, query:", query, 'results:', results);
     const navigate = useNavigate();
     const [showPlaylistChoices, setShowPlaylistChoices] = useState(false)
     const [chosenSong, setChosenSong] = useState("")
@@ -79,10 +79,11 @@ function SearchPage() {
 
     return (
         <main className='search'>
+            {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong} /> : ""}
             <h1>results for {query}</h1>
             {/* <Search /> */}
             <section className='song__results'>
-                {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong}/> : ""}
+                {/* {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong}/> : ""} */}
                 {results.map(result =>
                     <div key={result.id} className='song__row'>
                         <p className='song'>
