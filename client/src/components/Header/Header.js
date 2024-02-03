@@ -16,7 +16,7 @@ function Header() {
     return (
         <header>
             <Link to='/home'>HearHere</Link>
-            {/* <Search /> */}
+            <Search />
             <nav>
                 <Link to='/home'>Home</Link>
                 {/* <Link to='/login'>Log In</Link>
