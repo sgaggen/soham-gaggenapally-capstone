@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-// import Search from '../../components/Search/Search';
 import './SearchPage.scss';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlaylistChoices from '../../components/PlaylistChoices/PlaylistChoices';
