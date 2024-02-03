@@ -1,3 +1,4 @@
+import './PlaylistChoices.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
@@ -83,11 +84,11 @@ function PlaylistChoices({updater, song}) {
     if (!playlists) return <p>loading your playlists</p>
 
     return (
-        <div>
+        <div className='playlist-modal'>
             <div>which playlist would you like to save this song to?
                 {playlists.map(playlist =>
                     <div key={playlist.id} onClick={() => handleAddToPlaylist(playlist.playlist_group_id)}>
-                        <p>
+                        <p className='playlist-modal__result'>
                             playlist name: {playlist.playlist_name}
                         </p>
                     </div>)}
