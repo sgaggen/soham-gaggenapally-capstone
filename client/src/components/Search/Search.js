@@ -31,7 +31,7 @@ function Search() {
         else {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/auto/${event.target.value}`);
-                console.log("input:", event.target.value, response.data.results)
+                // console.log("input:", event.target.value, response.data.results)
                 setAutocomplete(response.data.results);
             } catch (error) {
                 console.log('client error in auto complete:', error);
