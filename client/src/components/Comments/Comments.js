@@ -4,8 +4,8 @@ function Comments ({existingComments}) {
     return (
         <section>
             {existingComments ? existingComments.map(comment => 
-                <article key={comment.id}>
-                    {comment.comment_content}
+                <article key={comment.comment_id}>
+                    {`${comment.comment_user_name} said: ${comment.comment_content}`}
                 </article>
             ) : null}
 

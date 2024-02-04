@@ -96,25 +96,131 @@ app.post("/save", async (req, res) => {
     }
 })
 
-// app.get("/db/activity", async (_req, res) => {
+
+// app.get("/db/activity00", async (_req, res) => {
 //     try {
 //         const data = await knex('activity')
-//             // .leftJoin("comment", "activity_id", "activity.id")
+//             .leftJoin("comment", "comment.activity_id", "activity.id")
 //             .orderBy('time', 'desc')
-//             // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
-//             .limit(4);
+//             .select('activity.*',
+//                 'comment.id as comment_id',
+//                 'comment.created_at as comment_created_at',
+//                 'comment.user_id as comment_user_id',
+//                 'comment.content as comment_content',
+//                 'comment.activity_id as comment_activtiy_id')
+//             .leftJoin('user', 'comment.user_id', 'user.id')
+//             .limit(100);
 
-//         // const commentedData = data.map(async element => {
-//         //     const commentData = await knex('comment').where({activity_id: element.id});
-//         //     // console.log("commentData|", commentData);
-//         //     // if (commentData.length > 0) console.log("commentData exists");
-//         //     if (commentData.length > 0) element.comments = commentData;
-//         //     return element
-//         // })
 
-//         // console.log("server GET/activity:", commentedData);
-//         console.log("server GET/activity:", data);
-//         res.json(data);
+//         const commentedData = data.reduce((result, current) => {
+//             const existingEntry = result.find(entry => entry.id === current.id);
+
+//             if (existingEntry) {
+//                 // append the comment to the existing entry only if it exists
+//                 if (current.comment_id !== null) {
+//                     existingEntry.comments.push({
+//                         comment_id: current.comment_id,
+//                         comment_created_at: current.comment_created_at,
+//                         comment_user_id: current.comment_user_id,
+//                         comment_content: current.comment_content,
+//                     });
+//                 }
+//             } else {
+//                 // create a new entry
+//                 const newEntry = {
+//                     id: current.id,
+//                     user_id: current.user_id,
+//                     song_id: current.song_id,
+//                     time: current.time,
+//                 };
+
+//                 // append the comment if it exists
+//                 if (current.comment_id !== null) {
+//                     newEntry.comments = [{
+//                         comment_id: current.comment_id,
+//                         comment_created_at: current.comment_created_at,
+//                         comment_user_id: current.comment_user_id,
+//                         comment_content: current.comment_content,
+//                     }];
+//                 }
+
+//                 result.push(newEntry);
+//             }
+
+//             return result;
+//         }, []);
+
+//         res.json(commentedData)
+//     } catch (error) {
+//         console.log("server something wrong wtih accessing db activity it seems:", error)
+//     }
+// });
+
+
+
+// app.get("/db/activity01", async (_req, res) => {
+//     try {
+
+//         const data = await knex
+//             .select(
+//                 'activity.id as activity_id',
+//                 'activity.user_id as activity_user_id',
+//                 'activity.song_id as activity_song_id',
+//                 'activity.time as activity_time',
+//                 'user.name as user_name',
+//                 'comment.id as comment_id',
+//                 'comment.user_id as comment_user_id',
+//                 'comment.content as comment_content',
+//                 'comment_user.name as comment_user_name'
+//             )
+//             .from('activity')
+//             .join('user', 'activity.user_id', 'user.id')
+//             .leftJoin('comment', 'activity.id', 'comment.activity_id')
+//             .leftJoin('user as comment_user', 'comment.user_id', 'comment_user.id')
+//             .orderBy('activity.id')
+//             .orderBy('comment.id')
+//             .groupBy('activity.id', 'comment.id');
+
+//         // Process the data to group comments for the same activity
+//         const commentedData = data.reduce((acc, row) => {
+//             const existingActivity = acc.find((activity) => activity.activity_id === row.activity_id);
+
+//             if (existingActivity) {
+//                 // Add comment to existing activity
+//                 if (row.comment_id) {
+//                     existingActivity.comments.push({
+//                         comment_id: row.comment_id,
+//                         comment_user_id: row.comment_user_id,
+//                         comment_content: row.comment_content,
+//                         comment_user_name: row.comment_user_name,
+//                     });
+//                 }
+//             } else {
+//                 // Create a new activity with or without comments
+//                 acc.push({
+//                     activity_id: row.activity_id,
+//                     activity_user_id: row.activity_user_id,
+//                     activity_song_id: row.activity_song_id,
+//                     activity_time: row.activity_time,
+//                     user_name: row.user_name,
+//                     comments: row.comment_id
+//                         ? [
+//                             {
+//                                 comment_id: row.comment_id,
+//                                 comment_user_id: row.comment_user_id,
+//                                 comment_content: row.comment_content,
+//                                 comment_user_name: row.comment_user_name,
+//                             },
+//                         ]
+//                         : [],
+//                 });
+//             }
+
+//             return acc;
+//         }, []);
+
+//         // res.json(data)
+//         res.json(commentedData)
 //     } catch (error) {
 //         console.log("server something wrong wtih accessing db activity it seems:", error)
 //     }
@@ -122,51 +228,69 @@ app.post("/save", async (req, res) => {
 
 app.get("/db/activity", async (_req, res) => {
     try {
-        const data = await knex('activity')
-            .leftJoin("comment", "comment.activity_id", "activity.id")
-            .orderBy('time', 'desc')
-            .select('activity.*', 'comment.id as comment_id', 'comment.created_at as comment_created_at', 'comment.user_id as comment_user_id', 'comment.content as comment_content', 'comment.activity_id as comment_activtiy_id')
-            .limit(10);
 
+        const data = await knex
+            .select(
+                'activity.id as activity_id',
+                'activity.user_id as activity_user_id',
+                'activity.song_id as activity_song_id',
+                'activity.time as activity_time',
+                'user.name as user_name',
+                'song.name as song_name',
+                'comment.id as comment_id',
+                'comment.user_id as comment_user_id',
+                'comment.content as comment_content',
+                'comment_user.name as comment_user_name'
+            )
+            .from('activity')
+            .join('user', 'activity.user_id', 'user.id')
+            .join('song', 'activity.song_id', 'song.id')
+            .leftJoin('comment', 'activity.id', 'comment.activity_id')
+            .leftJoin('user as comment_user', 'comment.user_id', 'comment_user.id')
+            .orderBy('activity.id')
+            .orderBy('comment.id')
+            .groupBy('activity.id', 'comment.id');
 
-        const commentedData = data.reduce((result, current) => {
-            const existingEntry = result.find(entry => entry.id === current.id);
+        // Process the data to group comments for the same activity
+        const commentedData = data.reduce((acc, row) => {
+            const existingActivity = acc.find((activity) => activity.activity_id === row.activity_id);
 
-            if (existingEntry) {
-                // append the comment to the existing entry only if it exists
-                if (current.comment_id !== null) {
-                    existingEntry.comments.push({
-                        comment_id: current.comment_id,
-                        comment_created_at: current.comment_created_at,
-                        comment_user_id: current.comment_user_id,
-                        comment_content: current.comment_content,
+            if (existingActivity) {
+                // Add comment to existing activity
+                if (row.comment_id) {
+                    existingActivity.comments.push({
+                        comment_id: row.comment_id,
+                        comment_user_id: row.comment_user_id,
+                        comment_content: row.comment_content,
+                        comment_user_name: row.comment_user_name,
                     });
                 }
             } else {
-                // create a new entry
-                const newEntry = {
-                    id: current.id,
-                    user_id: current.user_id,
-                    song_id: current.song_id,
-                    time: current.time,
-                };
-
-                // append the comment if it exists
-                if (current.comment_id !== null) {
-                    newEntry.comments = [{
-                        comment_id: current.comment_id,
-                        comment_created_at: current.comment_created_at,
-                        comment_user_id: current.comment_user_id,
-                        comment_content: current.comment_content,
-                    }];
-                }
-
-                result.push(newEntry);
+                // Create a new activity with or without comments
+                acc.push({
+                    activity_id: row.activity_id,
+                    activity_user_id: row.activity_user_id,
+                    activity_song_id: row.activity_song_id,
+                    activity_time: row.activity_time,
+                    user_name: row.user_name,
+                    song_name: row.song_name,
+                    comments: row.comment_id
+                        ? [
+                            {
+                                comment_id: row.comment_id,
+                                comment_user_id: row.comment_user_id,
+                                comment_content: row.comment_content,
+                                comment_user_name: row.comment_user_name,
+                            },
+                        ]
+                        : [],
+                });
             }
 
-            return result;
+            return acc;
         }, []);
 
+        // res.json(data)
         res.json(commentedData)
     } catch (error) {
         console.log("server something wrong wtih accessing db activity it seems:", error)
