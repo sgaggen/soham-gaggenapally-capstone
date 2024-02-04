@@ -10,6 +10,19 @@ function Comments ({existingComments}) {
             ) : null}
 
             <div className='comment__add'>+</div>
+            <form className='comment__form' onSubmit={console.log}>
+                <label htmlFor="comment-input" className='invisible'>Search</label>
+                <input
+                    type="text"
+                    name="comment-input"
+                    id="comment-input"
+                    className='comment-input'
+                    // className={`form__input ${someError && 'form__input--invalid'}`}
+                    placeholder="add a comment"
+                    // onChange={handleInputChange}
+                    // onBlur={handleBlur}
+                />
+            </form>
         </section>
     )
 }

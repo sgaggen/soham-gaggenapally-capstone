@@ -237,6 +237,7 @@ app.get("/db/activity", async (_req, res) => {
                 'activity.time as activity_time',
                 'user.name as user_name',
                 'song.name as song_name',
+                'song.image as song_image',
                 'comment.id as comment_id',
                 'comment.user_id as comment_user_id',
                 'comment.content as comment_content',
@@ -274,6 +275,7 @@ app.get("/db/activity", async (_req, res) => {
                     activity_time: row.activity_time,
                     user_name: row.user_name,
                     song_name: row.song_name,
+                    song_image: row.song_image,
                     comments: row.comment_id
                         ? [
                             {

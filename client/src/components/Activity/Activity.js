@@ -82,9 +82,9 @@ function Activity({ update }) {
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
+                            {/* <img src={action.song_image} alt={`Cover for ${action.song_name}`} className='song__cover'/> */}
                             {action.song_name} saved by {action.user_name} {timeFormatter(action.activity_time)}
                         </p>
-                        {/* {action.comments ? <div>comments</div> : ""} */}
                         <Comments existingComments={action.comments} />
 
                     </div>
