@@ -17,10 +17,16 @@ function Search() {
         return
     }
 
-    // function clearSearch() {
-    //     const input = document.querySelector("#search");
-    //     // input.reset();
-    // }
+    function handleBlur() {
+        return
+    }
+
+    function clearSearch() {
+        const form = document.querySelector(".search-bar__form");
+        console.log(form)
+        form.reset();
+        setAutocomplete([]);
+    }
 
     async function handleInputChange(event) {
         // const { name, value } = event.target;
@@ -45,7 +51,7 @@ function Search() {
 
     return (
         <div className='search-bar'>
-            <form onSubmit={handleSearch}>
+            <form className='search-bar__form' onSubmit={handleSearch}>
                 <label htmlFor="search" className='invisible'>Search</label>
                 <input
                     type="text"
@@ -54,7 +60,7 @@ function Search() {
                     // className={`form__input ${someError && 'form__input--invalid'}`}
                     placeholder="search for a song"
                     onChange={handleInputChange}
-                    onBlur={() => setAutocomplete([])}
+                    onBlur={handleBlur}
                 />
             </form>
             <div className='autocomplete'>
@@ -62,7 +68,8 @@ function Search() {
                     <Link
                         to={`/search/${result}`}
                         key={uuidv4()}
-                        onClick={() => setAutocomplete([])}
+                        // onClick={() => setAutocomplete([])}
+                        onClick={clearSearch}
                         // className='autocomplete__result button--add song'
                         className='autocomplete__result'
                     >
