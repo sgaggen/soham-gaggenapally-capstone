@@ -42,6 +42,7 @@ function AccountPage() {
 
             getUser();
             event.target.reset();
+            alert('account details updated successfully')
 
         } catch (error) {
             console.log("error client updating account:", error);
