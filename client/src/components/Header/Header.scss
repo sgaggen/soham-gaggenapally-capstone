@@ -13,7 +13,20 @@ header {
         &:hover {
             color: gray;
         }
+
+        img {
+            // fill: red;
+            height: 2rem;
+            padding-top: .5rem;
+            // width: 10px;
+        }
     }
+
+    // &__logo {
+    //     fill: yellow;
+    //     // height: 10px;
+    //     // width: 10px;
+    // }
 }
 
 nav {
@@ -21,5 +34,5 @@ nav {
     justify-content: space-between;
     // width: 30%;
     gap: 2rem;
-    
+
 }

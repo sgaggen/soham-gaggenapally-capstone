@@ -1,5 +1,5 @@
 import './Header.scss';
-
+import logo from '../../assets/icons/HearHere-white.png'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Search from '../Search/Search';
@@ -15,7 +15,7 @@ function Header() {
 
     return (
         <header>
-            <Link to='/home'>HearHere</Link>
+            <Link to='/home'><img className='header__logo' src={logo} alt="HearHere Logo" /></Link>
             <Search />
             <nav>
                 <Link to='/home'>Home</Link>
