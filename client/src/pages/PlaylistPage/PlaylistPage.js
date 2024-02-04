@@ -7,8 +7,9 @@ import { useParams } from 'react-router-dom';
 
 
 function PlaylistPage() {
-    const [playlist, setPlaylist] = useState([])
+    const [playlist, setPlaylist] = useState([]);
     let { playlistId } = useParams();
+    // const [title, setTitle] = useState("");
 
     async function getPlaylist() {
         // console.log("in getuser") 
@@ -71,7 +72,7 @@ function PlaylistPage() {
 
     return (
         <main className='playlist'>
-            <h1>this is your playlist</h1>
+            <h1>this is your {playlist[0]?.playlist_name} playlist</h1>
             <div className='song__results'>these are the songs:
                 {playlist.map(song =>
                     <div key={song.id} className='song__row'>
