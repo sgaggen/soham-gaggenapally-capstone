@@ -1,3 +1,4 @@
+import './AccountPage.scss'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -46,7 +47,7 @@ function AccountPage() {
     };
     // use another div to show the actual info and put the editing part to the right
     return (
-        <main>
+        <main className='account'>
             <h1>hi, {user.name}</h1>
             <form onSubmit={handleUpdateAccount}> 
                 <fieldset>
