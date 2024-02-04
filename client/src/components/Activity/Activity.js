@@ -53,6 +53,12 @@ function Activity({ update }) {
         }
     }
 
+    function timeFormatter(time) {
+        let formattedTime = time;
+        console.log(formattedTime);
+        return formattedTime;
+    }
+
     useEffect(() => { getActivity() }, [update]);
 
 
@@ -76,7 +82,7 @@ function Activity({ update }) {
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
-                            {action.song_name} saved by {action.user_name} at {action.activity_time} 
+                            {action.song_name} saved by {action.user_name} at {timeFormatter(action.activity_time)} 
                         </p>
                         {/* {action.comments ? <div>comments</div> : ""} */}
                         <Comments existingComments={action.comments} />
