@@ -44,6 +44,8 @@ function Activity({ update }) {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity`);
                 setActivity(response.data)
+                // const response2 = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity2`);
+                // console.log('second api:', response2.data)
                 
             } catch (error) {
                 console.log("client couldn't get activity:", error)
@@ -72,9 +74,9 @@ function Activity({ update }) {
             <h1>activity</h1>
             <div className='song__results'>this is some activity:
                 {activity.map(action =>
-                    <div key={action.id}>
+                    <div key={action.activity_id}>
                         <p className='song'>
-                            SONG {action.song_id} by USER {action.user_id} at {action.time} 
+                            {action.song_name} saved by {action.user_name} at {action.activity_time} 
                         </p>
                         {/* {action.comments ? <div>comments</div> : ""} */}
                         <Comments existingComments={action.comments} />

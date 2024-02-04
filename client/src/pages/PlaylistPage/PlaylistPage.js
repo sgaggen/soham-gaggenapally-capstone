@@ -76,7 +76,7 @@ function PlaylistPage() {
                 {playlist.map(song =>
                     <div key={song.id} className='song__row'>
                         <p className='song'>
-                            SONG {song.song_id}
+                            {song.song_name} by {song.song_artist}
                         </p>
                         <button className='button--remove' onClick={() => handleRemoveClick(song.id)}> - </button>
                     </div>)}
