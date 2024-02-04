@@ -384,7 +384,10 @@ app.get('/:userId/playlists', async (req, res) => {
 app.get('/playlist/:playlistId', async (req, res) => {
 
     try {
-        const playlist = await knex('playlist').where({ playlist_group_id: req.params.playlistId });
+        const playlist = await knex('playlist')
+            .where({ playlist_group_id: req.params.playlistId })
+            .join('song', 'playlist.song_id', 'song.id')
+            .select('playlist.*', 'song.name as song_name', 'song.artist as song_artist');
 
         console.log("server getting one playlist:", playlist)
         res.json(playlist)
