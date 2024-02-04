@@ -1,6 +1,7 @@
 @use '../../styles/partials/variables' as *;
 
 header {
+    z-index: 99;
     // background-color: red;
     display: flex;
     align-items: center;

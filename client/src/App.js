@@ -7,6 +7,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
@@ -23,7 +24,7 @@ function App() {
                 <Route path="/search/:query" element={<SearchPage />} />
                 {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>
-            {/* <Footer /> */}
+            <Footer />
         </BrowserRouter>
     );
 }
