@@ -2,6 +2,7 @@ import './Activity.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 import Comments from '../Comments/Comments';
 
 
@@ -46,17 +47,16 @@ function Activity({ update }) {
                 setActivity(response.data)
                 // const response2 = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity2`);
                 // console.log('second api:', response2.data)
-                
+
             } catch (error) {
                 console.log("client couldn't get activity:", error)
             }
         }
     }
 
-    function timeFormatter(time) {
-        let formattedTime = time;
-        console.log(formattedTime);
-        return formattedTime;
+    function timeFormatter(isoTime) {
+        const inputTime = new Date(isoTime);
+        return formatDistanceToNow(inputTime, { addSuffix: true });
     }
 
     useEffect(() => { getActivity() }, [update]);
@@ -82,7 +82,7 @@ function Activity({ update }) {
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
-                            {action.song_name} saved by {action.user_name} at {timeFormatter(action.activity_time)} 
+                            {action.song_name} saved by {action.user_name} {timeFormatter(action.activity_time)}
                         </p>
                         {/* {action.comments ? <div>comments</div> : ""} */}
                         <Comments existingComments={action.comments} />

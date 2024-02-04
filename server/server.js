@@ -247,7 +247,7 @@ app.get("/db/activity", async (_req, res) => {
             .join('song', 'activity.song_id', 'song.id')
             .leftJoin('comment', 'activity.id', 'comment.activity_id')
             .leftJoin('user as comment_user', 'comment.user_id', 'comment_user.id')
-            .orderBy('activity.id')
+            .orderBy('activity.id', 'desc')
             .orderBy('comment.id')
             .groupBy('activity.id', 'comment.id');
 

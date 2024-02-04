@@ -84,11 +84,13 @@ textarea::placeholder {
 
 .song {
     background-color: $darkergray;
-    padding: 0.25rem 0;
+    // padding: 0.25rem 0;
+    // padding-top: 0.5rem;
+    padding: 0.5rem;
+    height: auto;
     width: 90%;
     border-radius: 0.5rem;
     box-sizing: border-box;
     height: 2.5rem;
     text-align: center;
-    padding-top: 0.5rem;
 }

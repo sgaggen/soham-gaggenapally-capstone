@@ -1,15 +1,15 @@
-
+import './Comments.scss'
 
 function Comments ({existingComments}) {
     return (
-        <section>
+        <section className='comments'>
             {existingComments ? existingComments.map(comment => 
-                <article key={comment.comment_id}>
+                <article key={comment.comment_id} className='comment'>
                     {`${comment.comment_user_name} said: ${comment.comment_content}`}
                 </article>
             ) : null}
 
-            <div>this is the comments div yay - add a new comment here</div>
+            <div className='comment__add'>+</div>
         </section>
     )
 }
