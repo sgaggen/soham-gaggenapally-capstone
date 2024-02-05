@@ -1,0 +1,42 @@
+@use '../../styles/partials/variables' as *;
+
+.search-bar {
+    text-align: center;
+    box-sizing: border-box;
+
+    form {
+        box-sizing: border-box;
+    }
+
+    input {
+        width: 40vw;
+    }
+
+    .autocomplete {
+        position: absolute;
+
+        background-color: $lightgray;
+        opacity: 95%;
+        border-radius: 0.5rem;
+
+        &__result {
+            display: block;
+            box-sizing: border-box;
+            width: calc(40vw + 1rem);
+            height: 2.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+
+            &:hover {
+                background-color: black;
+                color: $white;
+                // opacity: 100%;
+            }
+        }
+
+    }
+
+}

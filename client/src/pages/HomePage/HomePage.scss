@@ -1,0 +1,14 @@
+.home {
+    margin: 0% 7% 0 7%;
+
+    &__search {
+        width: 100%;
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+}

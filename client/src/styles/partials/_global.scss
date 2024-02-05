@@ -1,0 +1,89 @@
+@use './variables' as *;
+@use 'fonts' as *;
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background-color: $darkgray;
+    color: $white;
+    font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 5rem;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: $white;
+}
+
+input,
+input::placeholder,
+textarea,
+textarea::placeholder,
+select,
+button,
+input[type='text'],
+input[type='password'] {
+    font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+    background-color: $darkergray;
+    color: $white;
+    border: none;
+    outline: none;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+    background-color: transparent;
+}
+
+.button {
+    &:hover {
+        background-color: $lightgray;
+        cursor: pointer;
+    }
+
+    &--add,
+    &--remove {
+        border-radius: 50%;
+        aspect-ratio: 1;
+        width: 2.5rem;
+
+        &:hover {
+            background-color: $lightgray;
+            cursor: pointer;
+        }
+    }
+}
+
+.invisible {
+    display: none;
+}
+
+.song {
+    background-color: $darkergray;
+    padding: 0.5rem;
+    height: auto;
+    width: 90%;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    height: 2.5rem;
+    text-align: center;
+}
