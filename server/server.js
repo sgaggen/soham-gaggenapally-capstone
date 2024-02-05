@@ -237,6 +237,7 @@ app.get("/db/activity", async (_req, res) => {
                 'activity.time as activity_time',
                 'user.name as user_name',
                 'song.name as song_name',
+                'song.image as song_image',
                 'comment.id as comment_id',
                 'comment.user_id as comment_user_id',
                 'comment.content as comment_content',
@@ -247,7 +248,7 @@ app.get("/db/activity", async (_req, res) => {
             .join('song', 'activity.song_id', 'song.id')
             .leftJoin('comment', 'activity.id', 'comment.activity_id')
             .leftJoin('user as comment_user', 'comment.user_id', 'comment_user.id')
-            .orderBy('activity.id')
+            .orderBy('activity.id', 'desc')
             .orderBy('comment.id')
             .groupBy('activity.id', 'comment.id');
 
@@ -274,6 +275,7 @@ app.get("/db/activity", async (_req, res) => {
                     activity_time: row.activity_time,
                     user_name: row.user_name,
                     song_name: row.song_name,
+                    song_image: row.song_image,
                     comments: row.comment_id
                         ? [
                             {
@@ -310,6 +312,19 @@ app.get("/db/:activityId/comments", async (req, res) => {
     }
 });
 
+app.post("/db/comments", async(req, res) => {
+    try {
+        const response = await knex('comment').insert(req.body);
+        console.log("server first response from posting/comment:", response[0]);
+
+        const comment = await knex('comment').where({ id: response[0] }).first();
+        console.log("server comment from posting/comment:", comment);
+        res.json(response);
+    } catch (error) {
+        console.log('server error trying to post a comment:', error)
+    }
+});
+
 app.get("/db/:table", async (req, res) => {
     try {
         const data = await knex(req.params.table);
@@ -336,7 +351,7 @@ app.post("/login", async (req, res) => {
 app.post("/signup", async (req, res) => {
     try {
         const response = await knex('user').insert(req.body);
-        console.log("response from posting/signup:", response[0]);
+        console.log("server first response from posting/signup:", response[0]);
 
         const user = await knex('user').where({ id: response[0] }).first();
         console.log("server user from posting/signup:", user);

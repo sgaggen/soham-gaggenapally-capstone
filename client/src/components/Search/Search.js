@@ -18,6 +18,7 @@ function Search() {
     }
 
     function handleBlur() {
+        setTimeout(() => setAutocomplete([]), 1000)
         return
     }
 

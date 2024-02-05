@@ -5,6 +5,7 @@
 
     .song {
         width: 100%;
+        // height: auto;  // applied in global but it's not taking so might have to add for each scss
 
         &__results {
             display: flex;

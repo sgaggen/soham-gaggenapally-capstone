@@ -2,11 +2,13 @@ import './Activity.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 import Comments from '../Comments/Comments';
 
 
-function Activity({ update }) {
+function Activity() {
     const [activity, setActivity] = useState([])
+    const [update, setUpdate] = useState("")
 
     // async function handleFormSubmition(event) {
     //     event.preventDefault();
@@ -46,11 +48,16 @@ function Activity({ update }) {
                 setActivity(response.data)
                 // const response2 = await axios.get(`${process.env.REACT_APP_API_URL}/db/activity2`);
                 // console.log('second api:', response2.data)
-                
+
             } catch (error) {
                 console.log("client couldn't get activity:", error)
             }
         }
+    }
+
+    function timeFormatter(isoTime) {
+        const inputTime = new Date(isoTime);
+        return formatDistanceToNow(inputTime, { addSuffix: true });
     }
 
     useEffect(() => { getActivity() }, [update]);
@@ -72,14 +79,14 @@ function Activity({ update }) {
     return (
         <section className='activity'>
             <h1>activity</h1>
-            <div className='song__results'>this is some activity:
+            <div className='song__results'>this is some recent activity:
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
-                            {action.song_name} saved by {action.user_name} at {action.activity_time} 
+                            {/* <img src={action.song_image} alt={`Cover for ${action.song_name}`} className='song__cover'/> */}
+                            {action.song_name} saved by {action.user_name} {timeFormatter(action.activity_time)}
                         </p>
-                        {/* {action.comments ? <div>comments</div> : ""} */}
-                        <Comments existingComments={action.comments} />
+                        <Comments existingComments={action.comments} activityId={action.activity_id} updater={setUpdate}/>
 
                     </div>
                 )}
