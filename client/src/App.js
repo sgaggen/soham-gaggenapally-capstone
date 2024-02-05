@@ -20,9 +20,7 @@ function App() {
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/account" element={<AccountPage />} />
                 <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
-                {/* <Route path="/search/*" element={<SearchPage />} /> */}
                 <Route path="/search/:query" element={<SearchPage />} />
-                {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>
             <Footer />
         </BrowserRouter>
