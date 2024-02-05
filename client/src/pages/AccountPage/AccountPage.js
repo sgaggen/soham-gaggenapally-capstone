@@ -1,15 +1,12 @@
 import './AccountPage.scss'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useEffect, useState } from "react";
 
 function AccountPage() {
     const [user, setUser] = useState([])
     const [initial, setInitial] = useState([])
 
     async function getUser() {
-        console.log("in getuser")
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`);
             setUser(response.data);
@@ -28,21 +25,16 @@ function AccountPage() {
         event.preventDefault();
 
         try {
-            console.log(event.target);
-
             const response = await axios.put(`${process.env.REACT_APP_API_URL}/user/${window.sessionStorage.getItem("userId")}`, {
                 name: event.target.name.value || initial.name,
                 username: event.target.username.value || initial.username,
                 password: event.target.password.value || initial.password,
                 email: event.target.email.value || initial.email
             });
-            console.log(response.data)
-
-
 
             getUser();
             event.target.reset();
-            alert('account details updated successfully')
+            alert('account details updated successfully!')
 
         } catch (error) {
             console.log("error client updating account:", error);
@@ -50,13 +42,10 @@ function AccountPage() {
     };
 
     function handleChange(event) {
-        console.log("target:",event.target)
         const { name, value } = event.target;
         setUser({...user, [name]: value});
-        console.log(user)
     }
 
-    // use another div to show the actual info and put the editing part to the right
     return (
         <main className='account'>
             <h1>hi, {initial.name}</h1>
