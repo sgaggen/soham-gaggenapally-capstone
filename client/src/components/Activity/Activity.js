@@ -6,8 +6,9 @@ import { formatDistanceToNow } from 'date-fns';
 import Comments from '../Comments/Comments';
 
 
-function Activity({ update }) {
+function Activity() {
     const [activity, setActivity] = useState([])
+    const [update, setUpdate] = useState("")
 
     // async function handleFormSubmition(event) {
     //     event.preventDefault();
@@ -78,14 +79,14 @@ function Activity({ update }) {
     return (
         <section className='activity'>
             <h1>activity</h1>
-            <div className='song__results'>this is some activity:
+            <div className='song__results'>this is some recent activity:
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
                             {/* <img src={action.song_image} alt={`Cover for ${action.song_name}`} className='song__cover'/> */}
                             {action.song_name} saved by {action.user_name} {timeFormatter(action.activity_time)}
                         </p>
-                        <Comments existingComments={action.comments} />
+                        <Comments existingComments={action.comments} activityId={action.activity_id} updater={setUpdate}/>
 
                     </div>
                 )}

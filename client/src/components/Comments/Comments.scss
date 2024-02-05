@@ -26,6 +26,13 @@
             // box-sizing: content-box;
             padding: 0.5rem;
             width: calc(100% - 1rem);
+            background-color: $lightgray;
+            font-size: 0.8rem;
+
+            &[type='text']::placeholder {
+                // color: $white;
+                font-size: 0.8rem;
+            }
         }
     }
 }

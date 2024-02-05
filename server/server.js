@@ -312,6 +312,19 @@ app.get("/db/:activityId/comments", async (req, res) => {
     }
 });
 
+app.post("/db/comments", async(req, res) => {
+    try {
+        const response = await knex('comment').insert(req.body);
+        console.log("server first response from posting/comment:", response[0]);
+
+        const comment = await knex('comment').where({ id: response[0] }).first();
+        console.log("server comment from posting/comment:", comment);
+        res.json(response);
+    } catch (error) {
+        console.log('server error trying to post a comment:', error)
+    }
+});
+
 app.get("/db/:table", async (req, res) => {
     try {
         const data = await knex(req.params.table);
@@ -338,7 +351,7 @@ app.post("/login", async (req, res) => {
 app.post("/signup", async (req, res) => {
     try {
         const response = await knex('user').insert(req.body);
-        console.log("response from posting/signup:", response[0]);
+        console.log("server first response from posting/signup:", response[0]);
 
         const user = await knex('user').where({ id: response[0] }).first();
         console.log("server user from posting/signup:", user);
