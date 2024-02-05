@@ -126,6 +126,9 @@ The database contains the following tables:
 **GET /playlist/:playlistId**
 - Will get a specific playlist and its songs
 
+**POST /playlist**
+- Will create a new playlist
+
 **POST /playlist/:playlistId**
 - Will add a song to a specific playlist
 

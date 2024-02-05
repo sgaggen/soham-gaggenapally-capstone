@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Playlists() {
     const [playlists, setPlaylists] = useState([])
+    const [showAddPlaylist, setShowAddPlaylist] = useState(false)
 
     // async function handleFormSubmition(event) {
     //     event.preventDefault();
@@ -34,8 +35,6 @@ function Playlists() {
     //         console.log(error);
     //     }
     // }
-
-
 
 
     async function getPlaylists() {
@@ -72,8 +71,14 @@ function Playlists() {
                             playlist name: {playlist.playlist_name}
                         </p> */}
                         <Link to={`/playlist/${playlist.playlist_group_id}`} className='song'>{playlist.playlist_name}</Link>
-                    </div>)}
-                <button className="song button--add">+</button>
+                    </div>
+                )}
+                {/* <button className="song button--add">+</button> */}
+                {showAddPlaylist ?
+                    <div className='song' onClick={() => setShowAddPlaylist(false)}>div</div>
+                    :
+                    <button className="song button--add" onClick={() => setShowAddPlaylist(true)}>+</button>
+                }
             </div>
         </div>
     )
