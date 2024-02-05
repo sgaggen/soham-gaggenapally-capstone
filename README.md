@@ -11,7 +11,7 @@ How many times have you heard a friend play a song and then wonder what song it 
 ### User Profile
 
 - People who listen to music regularly and want to save their songs
-- People who want to share what they're listening to
+- People who want to share and comment on what they're listening to
 - People who want to discover what other people are listening to
 
 ### Features
@@ -41,17 +41,17 @@ Back End:
 
 ### APIs
 
-- Spotify API: search for songs and get basic track data
-- Custom API: handle user, song, and playlist data
+- Spotify's Web API: search for songs and get basic track data
+- Giorgio Bellisario's Music Autocomplete API: autocomplete when searching for a song
+- Custom API: handle user, song, comment, activity, and playlist data
 
 ### Sitemap
 
 - Login page
 - Sign up page
-- Landing page
+- Landing/home page
 - Song search page
-- Saved songs page
-- Saved playlist page
+- Playlist page
 - User page
 
 ### Mockups
@@ -77,31 +77,64 @@ Back End:
 
 ### Data
 
-The database will contain a table for users, a table for playlists, and possibly a table for activity.
+The database contains the following tables:
+- user: table for users and user information
+- playlist: table for songs and their associated playlists
+- user_playlist: table to map playlists to their owning users
+- song: table for songs and song information
+- activity: table for user activity (saving songs)
+- comment: table for user activity (commenting)
 
 ### Endpoints
 
-**GET /song/:songId**
-- Will get information on a specific song
+**GET /search/:search**
+- Will run the Spotify API for a specific query
 
-**GET /playlist/:playlistId**
-- Will get a information on a specific playlist
+**GET /auto/:search**
+- Will run the Autocomplete API for a specific query
 
-**POST /playlist/:playlistId/:songId**
-- Will add a song to a specific playlist
+**POST /save**
+- Will save a song, documenting it as activity
 
-**DELETE /playlist/:playlistId/:songId**
-- Will remove a song from a specific playlist
+**GET /db/activity**
+- Will get recent user activity
+
+**GET /db/:activityId/comments**
+- Will get comments from one specific activity
+
+**POST /db/comments**
+- Will save a user's comment on an activity
+
+**GET /db/:table**
+- Will return any table from the database
+
+**POST /login**
+- Will check for an existing user
+
+**POST /signup**
+- Will create a new account for a user
 
 **GET /user/:userId**
-- Will get a user's basic info, saved songs, and playlists
+- Will get a user's info
 
 **PUT /user/:userId**
-- Will update a user's info, saved songs, and/or playlists
+- Will update a user's info
+
+**GET /:userId/playlists**
+- Will get a user's playlists
+
+**GET /playlist/:playlistId**
+- Will get a specific playlist and its songs
+
+**POST /playlist/:playlistId**
+- Will add a song to a specific playlist
+
+**DELETE /playlist/:songId**
+- Will remove a song from a specific playlist
 
 ### Auth
 
-- Will use basic string checks to begin with
+- Will use a basic table lookup to begin with
 
 ## Roadmap
 
@@ -132,8 +165,8 @@ The database will contain a table for users, a table for playlists, and possibly
 ## Nice-to-haves
 
 - JWT auth | For more security
-- Autocomplete | For a more convenient search mechanism
+- ~~Autocomplete | For a more convenient search mechanism~~ | Completed
 - Spotify player embedded so user can play songs | For a more standalone experience
 - Song recommendations once one's been saved | For more functionality
-- Comment, rating, liking functionality | To make it more of a social media app
+- ~~Comment,~~ rating, liking functionality | To make it more of a social media app | Partially completed
 - DM and/or live update functionality using Socket.io | To make it more of a social media app
