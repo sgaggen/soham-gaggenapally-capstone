@@ -10,7 +10,6 @@
 
 body {
     height: 100vh;
-    // background-image: linear-gradient($darkgray, $lightergray);
     background-color: $darkgray;
     color: $white;
     font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
@@ -21,8 +20,6 @@ body {
 h1 {
     font-weight: 300;
     font-size: 5rem;
-    // line-height: 35vh;
-    // padding-top: calc(15vh - 5rem);
     padding-top: 5vh;
     padding-bottom: 5vh;
     text-align: center;
@@ -31,7 +28,6 @@ h1 {
 a {
     text-decoration: none;
     color: $white;
-    // padding: inherit;
 }
 
 input,
@@ -49,7 +45,6 @@ input[type='password'] {
     outline: none;
     text-align: center;
     padding: 0.5rem;
-    // margin: 0.25rem 0;
     border-radius: 0.5rem;
     font-size: 1rem;
 }
@@ -57,21 +52,21 @@ input[type='password'] {
 input::placeholder,
 textarea::placeholder {
     background-color: transparent;
-    // font-size: 5rem;
 }
 
 .button {
-    &:hover{
+    &:hover {
         background-color: $lightgray;
         cursor: pointer;
     }
 
-    &--add, &--remove {
+    &--add,
+    &--remove {
         border-radius: 50%;
         aspect-ratio: 1;
         width: 2.5rem;
 
-        &:hover{
+        &:hover {
             background-color: $lightgray;
             cursor: pointer;
         }
@@ -84,8 +79,6 @@ textarea::placeholder {
 
 .song {
     background-color: $darkergray;
-    // padding: 0.25rem 0;
-    // padding-top: 0.5rem;
     padding: 0.5rem;
     height: auto;
     width: 90%;
