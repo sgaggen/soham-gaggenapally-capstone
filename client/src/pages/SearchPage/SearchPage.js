@@ -6,25 +6,18 @@ import PlaylistChoices from '../../components/PlaylistChoices/PlaylistChoices';
 
 
 function SearchPage() {
-    console.log("actual top of searchpage, params.query:", useParams().query);
     const query = useParams().query;
-    // const [query, setQuery] = useState(useParams().query)
     const [results, setResults] = useState(null)
-    console.log("actual top of searchpage, query:", query, 'results:', results);
     const navigate = useNavigate();
     const [showPlaylistChoices, setShowPlaylistChoices] = useState(false)
     const [chosenSong, setChosenSong] = useState("")
-    console.log('client top of search, query:', query, 'results:', results)
 
     async function conductSearch(query) {
-        // event.preventDefault();
 
         try {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${query}`);
-            console.log(response.data.tracks.items);
             setResults(response.data.tracks.items);
 
-            // event.target.reset();
         } catch (error) {
             console.log("search didn't work from client:", error)
         }
@@ -41,8 +34,6 @@ function SearchPage() {
 
         setChosenSong(info.id);
         setShowPlaylistChoices(true);
-        // getPlaylists();
-        // createPlaylistOptions();
 
         const activityData = {
             user_id: window.sessionStorage.getItem("userId"),
@@ -61,17 +52,12 @@ function SearchPage() {
                 song: songData,
                 activity: activityData
             })
-
-            console.log("after tring to post:", response);
-            // updater("trigger re-render");
-            // console.log("after running setUpdate");
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        console.log('client search useeffect')
         conductSearch(query);
     }, [query])
 
@@ -81,9 +67,7 @@ function SearchPage() {
         <main className='search'>
             {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong} /> : ""}
             <h1>results for {query}</h1>
-            {/* <Search /> */}
             <section className='song__results'>
-                {/* {showPlaylistChoices ? <PlaylistChoices updater={setShowPlaylistChoices} song={chosenSong}/> : ""} */}
                 {results.map(result =>
                     <div key={result.id} className='song__row'>
                         <p className='song'>

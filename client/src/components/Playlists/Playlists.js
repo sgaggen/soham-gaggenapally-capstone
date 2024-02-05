@@ -8,40 +8,12 @@ function Playlists() {
     const [playlists, setPlaylists] = useState([])
     const [showAddPlaylist, setShowAddPlaylist] = useState(false)
 
-    // async function handleFormSubmition(event) {
-    //     event.preventDefault();
-
-    //     try {
-    //         const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
-    //         console.log(response.data.tracks.items);
-    //         setResults(response.data.tracks.items);
-
-    //         // event.target.reset();
-    //     } catch (error) {
-    //         console.log("search didn't work from client:", error)
-    //     }
-    // }
-
-    // async function handleAddClick(info) {
-
-    //     console.log(info);
-    //     console.log("need to add to user db")
-    //     console.log("need to add to activity db")
-
-    //     try {
-    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, info)
-    //         console.log("after tring to post:", response);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
 
     async function getPlaylists() {
         if (window.sessionStorage.getItem("userId")) {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/${window.sessionStorage.getItem("userId")}/playlists`)
-                // console.log(response.data)
                 setPlaylists(response.data)
             } catch (error) {
                 console.log("couldn't get activity:", error)
@@ -61,7 +33,6 @@ function Playlists() {
                 playlist_name: name,
                 playlist_group_id: name.replace(/ /g, "_") + "_" + id
             });
-            console.log('client end of creating a playlist:', response.data)
             event.target.reset();
             setShowAddPlaylist(false);
             getPlaylists();
@@ -87,9 +58,6 @@ function Playlists() {
             <div className='song__results'>these are your playlists:
                 {playlists.map(playlist =>
                     <div key={playlist.id}>
-                        {/* <p>
-                            playlist name: {playlist.playlist_name}
-                        </p> */}
                         <Link to={`/playlist/${playlist.playlist_group_id}`} className='song'>{playlist.playlist_name}</Link>
                     </div>
                 )}

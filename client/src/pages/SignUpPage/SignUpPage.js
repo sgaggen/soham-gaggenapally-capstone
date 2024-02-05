@@ -1,7 +1,6 @@
 import './SignUpPage.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { useEffect, useState } from "react";
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -10,15 +9,12 @@ function SignUpPage() {
         event.preventDefault();
 
         try {
-
-
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
                 name: event.target.name.value,
                 username: event.target.username.value,
                 password: event.target.password.value,
                 email: event.target.email.value,
             });
-            console.log("signuppage end of try:", response.data)
 
             if (response.data.id) {
                 window.sessionStorage.setItem("userId", response.data.id);
@@ -28,8 +24,6 @@ function SignUpPage() {
             navigate(0)
 
         } catch (error) {
-            // setIsLoginError(true);
-            // setErrorMessage(error.response.data.error.message);
             console.log("error logging in somehow:", error);
         }
     };

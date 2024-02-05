@@ -1,39 +1,11 @@
 import './PlaylistChoices.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 
 
 function PlaylistChoices({updater, song}) {
     const [playlists, setPlaylists] = useState([])
 
-    // async function handleFormSubmition(event) {
-    //     event.preventDefault();
-
-    //     try {
-    //         const response = await axios.get(`${process.env.REACT_APP_API_URL}/search/${event.target.search.value}`);
-    //         console.log(response.data.tracks.items);
-    //         setResults(response.data.tracks.items);
-
-    //         // event.target.reset();
-    //     } catch (error) {
-    //         console.log("search didn't work from client:", error)
-    //     }
-    // }
-
-    // async function handleAddClick(info) {
-
-    //     console.log(info);
-    //     console.log("need to add to user db")
-    //     console.log("need to add to activity db")
-
-    //     try {
-    //         const response = await axios.post(`${process.env.REACT_APP_API_URL}/save`, info)
-    //         console.log("after tring to post:", response);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
 
 
@@ -42,7 +14,6 @@ function PlaylistChoices({updater, song}) {
         if (window.sessionStorage.getItem("userId")) {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/${window.sessionStorage.getItem("userId")}/playlists`)
-                // console.log(response.data)
                 setPlaylists(response.data)
             } catch (error) {
                 console.log("couldn't get activity:", error)
@@ -53,14 +24,12 @@ function PlaylistChoices({updater, song}) {
 
 
     async function handleAddToPlaylist (playlistId) {
-        console.log("client received group id:", playlistId);
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/playlist/${playlistId}`, {
                 playlist_group_id: playlistId,
                 song_id: song
             });
-            console.log("client saving to playlist:", response.data)
             
             updater(false);
         } catch (error) {
