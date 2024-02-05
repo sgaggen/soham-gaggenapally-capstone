@@ -80,7 +80,8 @@ function PlaylistPage() {
                             {song.song_name} by {song.song_artist}
                         </p>
                         <button className='button--remove' onClick={() => handleRemoveClick(song.id)}> - </button>
-                    </div>)}
+                    </div>
+                )}
             </div>
         </main>
     )

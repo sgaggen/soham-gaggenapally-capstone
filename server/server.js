@@ -412,6 +412,19 @@ app.get('/playlist/:playlistId', async (req, res) => {
     }
 });
 
+app.post("/playlist", async(req, res) => {
+    try {
+        const response = await knex('user_playlist').insert(req.body);
+        console.log("server first response from posting/user_playlist:", response[0]);
+
+        const playlist = await knex('user_playlist').where({ id: response[0] }).first();
+        console.log("server playlist from posting/user_playlist:", playlist);
+        res.json(response);
+    } catch (error) {
+        console.log('server error trying to create a playlist:', error)
+    }
+});
+
 app.post('/playlist/:playlistId', async (req, res) => {
 
     try {
