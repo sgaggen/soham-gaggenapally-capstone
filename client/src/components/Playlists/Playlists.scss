@@ -23,4 +23,8 @@
             background-color: $lightgray;
         }
     }
+
+    &-input {
+        width: calc(100% - 1rem);
+    }
 }
