@@ -24,22 +24,16 @@ function Search() {
 
     function clearSearch() {
         const form = document.querySelector(".search-bar__form");
-        console.log(form)
         form.reset();
         setAutocomplete([]);
     }
 
     async function handleInputChange(event) {
-        // const { name, value } = event.target;
-        // console.log('client in handleinput change, input:', event.target.value);
-        // console.log(name,value)
-
 
         if (event.target.value === "") setAutocomplete([]);
         else {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/auto/${event.target.value}`);
-                // console.log("input:", event.target.value, response.data.results)
                 setAutocomplete(response.data.results);
             } catch (error) {
                 console.log('client error in auto complete:', error);
@@ -58,7 +52,6 @@ function Search() {
                     type="text"
                     name="search"
                     id="search"
-                    // className={`form__input ${someError && 'form__input--invalid'}`}
                     placeholder="search for a song"
                     onChange={handleInputChange}
                     onBlur={handleBlur}
@@ -69,9 +62,7 @@ function Search() {
                     <Link
                         to={`/search/${result}`}
                         key={uuidv4()}
-                        // onClick={() => setAutocomplete([])}
                         onClick={clearSearch}
-                        // className='autocomplete__result button--add song'
                         className='autocomplete__result'
                     >
                         {result}
