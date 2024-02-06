@@ -86,6 +86,7 @@ The database contains the following tables:
 - comment: table for user activity (commenting)
 
 The structure and relationships can be seen below.
+
 ![](/mockups/sql.png)
 
 ### Endpoints
