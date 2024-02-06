@@ -85,8 +85,6 @@ app.get("/auto/:search", async (req, res) => {
 })
 
 app.post("/save", async (req, res) => {
-    console.log("server req.body from POST /save:", req.body);
-
     try {
         let response = await knex('song').insert(req.body.song)
         response = await knex('activity').insert(req.body.activity)
@@ -172,10 +170,6 @@ app.get("/db/activity", async (_req, res) => {
 app.get("/db/:activityId/comments", async (req, res) => {
     try {
         const data = await knex('comment').where({ activity_id: req.params.activityId })
-        // .leftJoin("comment", "activity_id", "activity.id")
-        // .orderBy('time', 'desc');
-        // .select('activity.*', 'comment.id as comment_id', 'comment.created_at', 'comment.user_id', 'comment.content', 'comment.activity_id')
-        // .limit(10);
         res.json(data);
     } catch (error) {
         console.log("server something wrong wtih accessing db it seems:", error)
@@ -185,10 +179,7 @@ app.get("/db/:activityId/comments", async (req, res) => {
 app.post("/db/comments", async(req, res) => {
     try {
         const response = await knex('comment').insert(req.body);
-        console.log("server first response from posting/comment:", response[0]);
-
         const comment = await knex('comment').where({ id: response[0] }).first();
-        console.log("server comment from posting/comment:", comment);
         res.json(response);
     } catch (error) {
         console.log('server error trying to post a comment:', error)
@@ -207,11 +198,6 @@ app.get("/db/:table", async (req, res) => {
 app.post("/login", async (req, res) => {
     try {
         const user = await knex('user').where({ username: req.body.username }).first();
-        console.log("server user from posting/login:", user);
-
-        // if (!user) {
-        //     return res.status(401).json({ message: 'Credentials not found' });
-        // }
         res.send(user);
     } catch (error) {
         console.log("error server trying to log in:", error); // should probably send a 401 error or something
@@ -221,11 +207,7 @@ app.post("/login", async (req, res) => {
 app.post("/signup", async (req, res) => {
     try {
         const response = await knex('user').insert(req.body);
-        console.log("server first response from posting/signup:", response[0]);
-
         const user = await knex('user').where({ id: response[0] }).first();
-        console.log("server user from posting/signup:", user);
-
         res.send(user);
     } catch (error) {
         console.log("error server trying to sign up:", error);
@@ -236,7 +218,6 @@ app.get('/user/:userId', async (req, res) => {
 
     try {
         const user = await knex('user').where({ id: req.params.userId }).first();
-
         res.json(user)
     } catch (error) {
         console.log("something wrong server getting user info:", error)
@@ -247,7 +228,6 @@ app.put('/user/:userId', async (req, res) => {
 
     try {
         const user = await knex('user').where({ id: req.params.userId }).update(req.body);
-        console.log("user from server getting user:", user);
         res.json(user)
     } catch (error) {
         console.log("something wrong server updating user info:", error)
@@ -258,8 +238,6 @@ app.get('/:userId/playlists', async (req, res) => {
 
     try {
         const playlists = await knex('user_playlist').where({ user_id: req.params.userId });
-
-        console.log("server getting user's playlists:", playlists)
         res.json(playlists)
     } catch (error) {
         console.log("something wrong server getting user's playlists:", error)
@@ -274,8 +252,6 @@ app.get('/playlist/:playlistId', async (req, res) => {
             .join('song', 'playlist.song_id', 'song.id')
             .join('user_playlist', 'playlist.playlist_group_id', 'user_playlist.playlist_group_id')
             .select('playlist.*', 'song.name as song_name', 'song.artist as song_artist', 'playlist_name');
-
-        console.log("server getting one playlist:", playlist)
         res.json(playlist)
     } catch (error) {
         console.log("something wrong server getting a playlist:", error)
@@ -285,10 +261,7 @@ app.get('/playlist/:playlistId', async (req, res) => {
 app.post("/playlist", async(req, res) => {
     try {
         const response = await knex('user_playlist').insert(req.body);
-        console.log("server first response from posting/user_playlist:", response[0]);
-
         const playlist = await knex('user_playlist').where({ id: response[0] }).first();
-        console.log("server playlist from posting/user_playlist:", playlist);
         res.json(response);
     } catch (error) {
         console.log('server error trying to create a playlist:', error)
@@ -299,8 +272,6 @@ app.post('/playlist/:playlistId', async (req, res) => {
 
     try {
         const playlist = await knex('playlist').where({ playlist_group_id: req.params.playlistId }).insert(req.body);
-
-        console.log("server adding to playlist:", playlist)
         res.json(playlist)
 
     } catch (error) {
@@ -309,12 +280,8 @@ app.post('/playlist/:playlistId', async (req, res) => {
 });
 
 app.delete('/playlist/:songId', async (req, res) => {
-    console.log("server delete song from playlist req params:", req.params.songId);
-
     try {
         const playlist = await knex('playlist').where({ id: req.params.songId }).del();
-
-        console.log("server deleting from playlist:", playlist)
         res.json(playlist)
 
     } catch (error) {
