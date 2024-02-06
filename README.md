@@ -6,7 +6,7 @@ HearHere is an app for sharing songs and playlists with friends and family. It's
 
 ### Problem
 
-How many times have you heard a friend play a song and then wonder what song it was? How many times have you been at a part or event where the DJ was playing great music, only to never find that playlist again? HearHere aims to solve that problem by providing a platform for just that - a place to share and save music, using Spotify as the source of music.
+How many times have you heard a friend play a song and then wonder what song it was? How many times have you been at a party or event where the DJ was playing great music, only to never find that playlist again? HearHere aims to solve that problem by providing a platform for just that - a place to share and save music, using Spotify as the source of music.
 
 ### User Profile
 
@@ -84,6 +84,9 @@ The database contains the following tables:
 - song: table for songs and song information
 - activity: table for user activity (saving songs)
 - comment: table for user activity (commenting)
+
+The structure and relationships can be seen below.
+![](/mockups/sql.png)
 
 ### Endpoints
 
