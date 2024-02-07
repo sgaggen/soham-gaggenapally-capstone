@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Search from '../Search/Search';
 
-function Header() {
+function Header({ songPicker }) {
     const navigate = useNavigate();
 
-    function handleLogout () {
+    function handleLogout() {
         sessionStorage.removeItem('userId');
+        songPicker("")
         alert("logged out!")
         navigate('/home')
     }
