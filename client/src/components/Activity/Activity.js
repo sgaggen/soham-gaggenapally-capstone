@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Comments from '../Comments/Comments';
 
 
-function Activity() {
+function Activity({ songPicker }) {
     const [activity, setActivity] = useState([])
     const [update, setUpdate] = useState("")
 
@@ -52,7 +52,7 @@ function Activity() {
                 {activity.map(action =>
                     <div key={action.activity_id}>
                         <p className='song'>
-                            {action.song_name} saved by {action.user_name} {timeFormatter(action.activity_time)}
+                            <span className='song__link' onClick={() => songPicker(action.activity_song_id)}>{action.song_name}</span> saved by {action.user_name} {timeFormatter(action.activity_time)}
                         </p>
                         <Comments existingComments={action.comments} activityId={action.activity_id} updater={setUpdate}/>
 
