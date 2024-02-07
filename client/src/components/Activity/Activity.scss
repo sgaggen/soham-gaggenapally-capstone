@@ -11,7 +11,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1rem;
+        padding: 0.5rem 1rem;
 
         &__results {
             display: flex;
@@ -49,7 +49,8 @@
         }
 
         &__art {
-            height: 3rem;
+            height: 3.4rem;
+            padding-top: 0.4rem;
         }
     }
 }
