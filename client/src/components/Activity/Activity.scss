@@ -1,3 +1,5 @@
+@use '../../styles/partials/variables' as *;
+
 .activity {
     // margin: -5% 7% 0 7%;
     // margin-top: -5%;
@@ -5,7 +7,11 @@
 
     .song {
         width: 100%;
-        // height: auto;  // applied in global but it's not taking so might have to add for each scss
+        height: auto;  // applied in global but it's not taking so might have to add for each scss
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
 
         &__results {
             display: flex;
@@ -19,5 +25,32 @@
             align-items: center;
         }
 
+        &__link:hover{
+            color: $gray;
+            cursor: pointer;
+        }
+
+        // &__left {
+        //     width: 25%;
+        // }
+
+        &__center {
+            width: 50%;
+        }
+
+        &__right {
+            // width: 25%;
+            text-align: right;
+
+            &--text {
+                // color: $gray;
+                font-size: 0.65rem;
+            }
+        }
+
+        &__art {
+            height: 3.4rem;
+            padding-top: 0.4rem;
+        }
     }
 }
