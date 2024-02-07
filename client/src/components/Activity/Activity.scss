@@ -7,7 +7,11 @@
 
     .song {
         width: 100%;
-        // height: auto;  // applied in global but it's not taking so might have to add for each scss
+        height: auto;  // applied in global but it's not taking so might have to add for each scss
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1rem;
 
         &__results {
             display: flex;
@@ -24,6 +28,28 @@
         &__link:hover{
             color: $gray;
             cursor: pointer;
+        }
+
+        &__left {
+            // width: 25%;
+        }
+
+        &__center {
+            width: 50%;
+        }
+
+        &__right {
+            // width: 25%;
+            text-align: right;
+
+            &--text {
+                // color: $gray;
+                font-size: 0.65rem;
+            }
+        }
+
+        &__art {
+            height: 3rem;
         }
     }
 }

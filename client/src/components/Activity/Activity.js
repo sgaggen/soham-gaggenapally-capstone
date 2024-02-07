@@ -48,13 +48,31 @@ function Activity({ songPicker }) {
     return (
         <section className='activity'>
             <h1>activity</h1>
-            <div className='song__results'>this is some recent activity:
+            <div className='song__results'>this is what your friends listened to:
                 {activity.map(action =>
                     <div key={action.activity_id}>
-                        <p className='song'>
+                        <div className='song'>
+                            <div className='song__left'>
+                                <img className='song__art' src={action.song_image} alt={`Album cover for ${action.song_name}`} />
+                            </div>
+                            <p className='song__center'>
+                                <span className='song__link' onClick={() => songPicker(action.activity_song_id)}>{action.song_name}</span>
+                            </p>
+                            <div className='song__right'>
+                                <p className='song__right--text'>
+                                    saved by {action.user_name}
+                                </p>
+                                <p className='song__right--text'>
+                                    {timeFormatter(action.activity_time)}
+                                </p>
+
+                            </div>
+
+                        </div>
+                        {/* <p className='song'>
                             <span className='song__link' onClick={() => songPicker(action.activity_song_id)}>{action.song_name}</span> saved by {action.user_name} {timeFormatter(action.activity_time)}
-                        </p>
-                        <Comments existingComments={action.comments} activityId={action.activity_id} updater={setUpdate}/>
+                        </p> */}
+                        <Comments existingComments={action.comments} activityId={action.activity_id} updater={setUpdate} />
 
                     </div>
                 )}
