@@ -8,6 +8,7 @@ import AccountPage from "./pages/AccountPage/AccountPage";
 import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Footer from "./components/Footer/Footer";
+import Player from "./components/Player/Player";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
                 <Route path="/search/:query" element={<SearchPage />} />
             </Routes>
+            <Player />
             <Footer />
         </BrowserRouter>
     );

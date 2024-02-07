@@ -1,0 +1,15 @@
+.player {
+    margin: 0.75rem 7%;
+    width: calc(100vw - 12rem);
+    position: fixed;
+    bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    // align-items: flex-end;
+    // font-size: 0.65rem;
+    // padding: 2rem 0;
+    height: 4rem;
+    font-weight: 300;
+    // position: absolute;
+    flex: 1 0 auto;
+}
