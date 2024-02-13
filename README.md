@@ -171,9 +171,9 @@ The structure and relationships can be seen below.
 
 ## Nice-to-haves
 
-- JWT auth | For more security
+- JWT auth | For better security and access control
 - ~~Autocomplete | For a more convenient search mechanism~~ | Completed
-- Spotify player embedded so user can play songs | For a more standalone experience
+- ~~Spotify player embedded so user can play songs~~ | Completed
 - Song recommendations once one's been saved | For more functionality
 - ~~Comment,~~ rating, liking functionality | To make it more of a social media app | Partially completed
 - DM and/or live update functionality using Socket.io | To make it more of a social media app
